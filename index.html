@@ -40,16 +40,50 @@ nav a {
 
 /* PORTADA */
 .hero {
-    height: 90vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 20px;
 }
 
 .hero img {
     max-width: 100%;
-    max-height: 100%;
     border-radius: 20px;
+}
+
+/* BOTONES */
+.contenedor-botones {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 30px;
+}
+
+.card {
+    width: 28%;
+    position: relative;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.card img {
+    width: 100%;
+    border-radius: 20px;
+}
+
+.texto-card {
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    background: rgba(0,0,0,0.5);
+    padding: 8px;
+    border-radius: 10px;
+}
+
+.card:hover {
+    transform: scale(1.05);
 }
 
 /* BOTÓN SESIÓN */
@@ -59,7 +93,7 @@ nav a {
     border-radius: 20px;
 }
 
-/* ICONO PERFIL */
+/* PERFIL */
 .perfil-container {
     position: relative;
     display: inline-block;
@@ -122,10 +156,8 @@ button {
     </div>
 
     <div>
-        <!-- BOTÓN SESIÓN -->
         <a href="login.html" class="login-btn" id="btnSesion">Sesión</a>
 
-        <!-- ICONO PERFIL -->
         <div class="perfil-container" id="perfilMenu" style="display:none;">
             <img src="perfil.png" class="icono" onclick="toggleMenu()">
 
@@ -138,9 +170,34 @@ button {
     </div>
 </nav>
 
-<!-- PORTADA -->
-<div id="inicio" class="section active hero">
-    <img src="portada principal.jpeg">
+<!-- INICIO -->
+<div id="inicio" class="section active">
+
+    <!-- IMAGEN -->
+    <div class="hero">
+        <img src="portada principal.jpeg">
+    </div>
+
+    <!-- BOTONES -->
+    <div class="contenedor-botones">
+
+        <div class="card" onclick="mostrar('cultivos')">
+            <img src="plantar.jpeg">
+            <div class="texto-card">¿Qué puedo plantar?</div>
+        </div>
+
+        <div class="card" onclick="mostrar('recursos')">
+            <img src="sustentable.jpeg">
+            <div class="texto-card">Huerto sustentable</div>
+        </div>
+
+        <div class="card" onclick="mostrar('proveedores')">
+            <img src="proveedores.jpeg">
+            <div class="texto-card">Catálogo de proveedores</div>
+        </div>
+
+    </div>
+
 </div>
 
 <!-- PERFIL -->
