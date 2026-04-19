@@ -92,7 +92,7 @@ nav a {
     background: #408A19;
 }
 
-/* FORMULARIOS */
+/* FORM */
 input {
     display: block;
     margin: 10px 0;
@@ -113,7 +113,6 @@ button {
 
 <body>
 
-<!-- NAV -->
 <nav>
     <div>
         <a onclick="mostrar('inicio')">Inicio</a>
@@ -122,12 +121,11 @@ button {
         <a onclick="mostrar('proveedores')">Proveedores</a>
     </div>
 
-    <div id="nav-derecha">
-
+    <div>
         <!-- BOTÓN SESIÓN -->
-        <a onclick="mostrar('login')" class="login-btn" id="btnSesion">Sesión</a>
+        <a href="login.html" class="login-btn" id="btnSesion">Sesión</a>
 
-        <!-- PERFIL -->
+        <!-- ICONO PERFIL -->
         <div class="perfil-container" id="perfilMenu" style="display:none;">
             <img src="perfil.png" class="icono" onclick="toggleMenu()">
 
@@ -137,28 +135,12 @@ button {
                 <a onclick="logout()">Cerrar sesión</a>
             </div>
         </div>
-
     </div>
 </nav>
 
 <!-- PORTADA -->
 <div id="inicio" class="section active hero">
     <img src="portada principal.jpeg">
-</div>
-
-<!-- LOGIN -->
-<div id="login" class="section">
-    <h2>Iniciar Sesión</h2>
-
-    <input id="loginUser" placeholder="Usuario">
-    <input id="loginPass" type="password" placeholder="Contraseña">
-    <button onclick="login()">Entrar</button>
-
-    <h3>Crear cuenta</h3>
-
-    <input id="newUser" placeholder="Nuevo usuario">
-    <input id="newPass" type="password" placeholder="Nueva contraseña">
-    <button onclick="crearCuenta()">Registrar</button>
 </div>
 
 <!-- PERFIL -->
@@ -170,10 +152,8 @@ button {
 <!-- HUERTO -->
 <div id="huerto" class="section">
     <h2>Mi Huerto</h2>
-
     <input id="planta" placeholder="Agregar cultivo">
     <button onclick="agregarPlanta()">Agregar</button>
-
     <ul id="listaPlantas"></ul>
 </div>
 
@@ -207,40 +187,7 @@ function toggleMenu() {
     menu.style.display = menu.style.display === "block" ? "none" : "block";
 }
 
-/* LOGIN */
-function crearCuenta() {
-    localStorage.setItem("user", document.getElementById("newUser").value);
-    localStorage.setItem("pass", document.getElementById("newPass").value);
-    alert("Cuenta creada");
-}
-
-function login() {
-    let user = document.getElementById("loginUser").value;
-    let pass = document.getElementById("loginPass").value;
-
-    let savedUser = localStorage.getItem("user");
-    let savedPass = localStorage.getItem("pass");
-
-    if(user === savedUser && pass === savedPass) {
-        localStorage.setItem("sesion", user);
-
-        document.getElementById("btnSesion").style.display = "none";
-        document.getElementById("perfilMenu").style.display = "inline-block";
-
-        document.getElementById("infoUsuario").innerText = "Usuario: " + user;
-
-        mostrar("perfil");
-    } else {
-        alert("Datos incorrectos");
-    }
-}
-
-function logout() {
-    localStorage.removeItem("sesion");
-    location.reload();
-}
-
-/* SESIÓN ACTIVA */
+/* SESIÓN */
 window.onload = function() {
     let user = localStorage.getItem("sesion");
 
@@ -249,6 +196,11 @@ window.onload = function() {
         document.getElementById("perfilMenu").style.display = "inline-block";
         document.getElementById("infoUsuario").innerText = "Usuario: " + user;
     }
+}
+
+function logout() {
+    localStorage.removeItem("sesion");
+    location.reload();
 }
 
 /* HUERTO */
