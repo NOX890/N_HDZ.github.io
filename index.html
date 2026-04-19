@@ -37,7 +37,7 @@ nav a {
     display: block;
 }
 
-/* LOGIN BTN */
+/* BOTÓN SESIÓN */
 .login-btn {
     background: #8DE35F;
     padding: 10px 20px;
@@ -117,7 +117,6 @@ nav a {
         <a onclick="mostrar('cultivos')">Cultivos</a>
         <a onclick="mostrar('recursos')">Recursos</a>
         <a onclick="mostrar('proveedores')">Proveedores</a>
-        <a onclick="mostrar('editarPerfil')">Editar perfil</a>
     </div>
 
     <div>
@@ -127,6 +126,7 @@ nav a {
             <img src="perfil.png" class="icono" onclick="toggleMenu(event)">
 
             <div id="dropdownMenu" class="dropdown">
+                <a onclick="mostrar('editarPerfil')">Editar perfil</a>
                 <a onclick="mostrar('perfil')">Mi perfil</a>
                 <a onclick="mostrar('huerto')">Mi huerto</a>
                 <a onclick="logout()">Cerrar sesión</a>
@@ -142,7 +142,7 @@ nav a {
 
 <!-- PERFIL -->
 <div id="perfil" class="section">
-    <h2>Perfil</h2>
+    <h2>Mi perfil</h2>
     <h3 id="nombreBienvenida"></h3>
 </div>
 
@@ -195,66 +195,74 @@ nav a {
 </div>
 
 <script>
-function mostrar(id) {
-    document.querySelectorAll(".section").forEach(sec => sec.classList.remove("active"));
-    document.getElementById(id).classList.add("active");
-    document.getElementById("dropdownMenu").style.display = "none";
-}
+document.addEventListener("DOMContentLoaded", () => {
 
-function toggleMenu(event) {
-    event.stopPropagation();
-    let m = document.getElementById("dropdownMenu");
-    m.style.display = m.style.display === "block" ? "none" : "block";
-}
+    // ===== SECCIONES =====
+    window.mostrar = function (id) {
+        document.querySelectorAll(".section").forEach(sec => sec.classList.remove("active"));
+        document.getElementById(id).classList.add("active");
+        document.getElementById("dropdownMenu").style.display = "none";
+    };
 
-document.addEventListener("click", function () {
-    document.getElementById("dropdownMenu").style.display = "none";
-});
+    // ===== MENÚ =====
+    window.toggleMenu = function (event) {
+        event.stopPropagation();
+        let m = document.getElementById("dropdownMenu");
+        m.style.display = m.style.display === "block" ? "none" : "block";
+    };
 
-window.onload = function () {
+    document.addEventListener("click", () => {
+        document.getElementById("dropdownMenu").style.display = "none";
+    });
+
+    // ===== SESIÓN =====
     let user = localStorage.getItem("sesion");
 
-    if(user) {
+    if (user) {
         document.getElementById("btnSesion").style.display = "none";
         document.getElementById("perfilMenu").style.display = "inline-block";
         document.getElementById("nombreBienvenida").innerText = user;
     }
 
-    // cargar perfil
-    document.getElementById("nombreInput").value = localStorage.getItem("nombre") || "";
-    document.getElementById("zonaInput").value = localStorage.getItem("zona") || "";
+    // ===== PERFIL =====
+    const nombreInput = document.getElementById("nombreInput");
+    const zonaInput = document.getElementById("zonaInput");
+    const fotoPreview = document.getElementById("fotoPreview");
+
+    if (nombreInput) nombreInput.value = localStorage.getItem("nombre") || "";
+    if (zonaInput) zonaInput.value = localStorage.getItem("zona") || "";
 
     let foto = localStorage.getItem("foto");
-    if (foto) document.getElementById("fotoPreview").src = foto;
-};
+    if (foto && fotoPreview) fotoPreview.src = foto;
 
-// guardar nombre
-document.getElementById("nombreInput").addEventListener("input", e => {
-    localStorage.setItem("nombre", e.target.value);
-});
+    // ===== GUARDADO AUTOMÁTICO =====
+    nombreInput?.addEventListener("input", e => {
+        localStorage.setItem("nombre", e.target.value);
+    });
 
-// guardar zona
-document.getElementById("zonaInput").addEventListener("change", e => {
-    localStorage.setItem("zona", e.target.value);
-});
+    zonaInput?.addEventListener("change", e => {
+        localStorage.setItem("zona", e.target.value);
+    });
 
-// foto
-document.getElementById("fotoInput").addEventListener("change", function () {
-    let file = this.files[0];
-    let reader = new FileReader();
+    document.getElementById("fotoInput")?.addEventListener("change", function () {
+        let file = this.files[0];
+        let reader = new FileReader();
 
-    reader.onload = function (e) {
-        document.getElementById("fotoPreview").src = e.target.result;
-        localStorage.setItem("foto", e.target.result);
+        reader.onload = function (e) {
+            fotoPreview.src = e.target.result;
+            localStorage.setItem("foto", e.target.result);
+        };
+
+        reader.readAsDataURL(file);
+    });
+
+    // ===== LOGOUT =====
+    window.logout = function () {
+        localStorage.removeItem("sesion");
+        location.reload();
     };
 
-    reader.readAsDataURL(file);
 });
-
-function logout() {
-    localStorage.removeItem("sesion");
-    location.reload();
-}
 </script>
 
 </body>
