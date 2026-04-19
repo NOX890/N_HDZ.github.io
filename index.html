@@ -191,8 +191,8 @@ nav{
 .perfil-imagen img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    object-position: center top; /* 👈 clave */
+    object-fit: contain;   /* 👈 clave: no recorta, no hace zoom */
+    background: #0d6b2f;   /* relleno para espacios vacíos */
 }
 
 /* EDITAR PERFIL */
