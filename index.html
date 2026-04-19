@@ -1,60 +1,53 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>Siembra Seguro</title>
+<meta charset="UTF-8">
+<title>Siembra Seguro</title>
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<style>
+body {
+    margin: 0;
+    font-family: Arial;
+    background: #111;
+}
 
-        body {
-            background-color: #111;
-            font-family: Arial, sans-serif;
-        }
+/* CONTENEDOR PRINCIPAL */
+.hero {
+    height: 100vh;
+    display: flex;
+    justify-content: center; /* centra horizontal */
+    align-items: center;     /* centra vertical */
+    position: relative;
+}
 
-        .contenedor {
-            margin: 5%;
-            height: 90vh;
-            position: relative;
-            border-radius: 20px;
-            overflow: hidden;
-        }
+/* IMAGEN */
+.hero img {
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 20px;
+    object-fit: cover;
+}
 
-        .fondo {
-            width: 100%;
-            height: 100%;
-            background: url("portada principal.jpeg") center/cover no-repeat;
-        }
-
-        .btn-login {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            padding: 12px 25px;
-            background-color: #8DE35F;
-            color: #000;
-            text-decoration: none;
-            font-weight: bold;
-            border-radius: 25px;
-            transition: 0.3s;
-        }
-
-        .btn-login:hover {
-            background-color: #6fc94a;
-        }
-    </style>
+/* TEXTO (para que lo uses después) */
+.texto {
+    position: absolute;
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+}
+</style>
 </head>
 
 <body>
 
-    <div class="contenedor">
-        <div class="fondo"></div>
-        <a href="#" class="btn-login">Iniciar sesión</a>
+<div class="hero">
+    <img src="portada principal.jpeg" alt="Portada">
+
+    <!-- AQUÍ PUEDES AGREGAR TEXTO -->
+    <div class="texto">
+        <!-- Escribe aquí -->
     </div>
+</div>
 
 </body>
 </html>
