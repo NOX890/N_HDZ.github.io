@@ -37,7 +37,37 @@ nav a {
     display: block;
 }
 
-/* BOTÓN SESIÓN */
+/* PORTADA */
+.hero {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+.hero img {
+    max-width: 90%;
+    border-radius: 20px;
+}
+
+/* BOTONES */
+.contenedor-botones {
+    display: flex;
+    justify-content: space-around;
+    padding: 30px;
+}
+
+.card {
+    width: 28%;
+    position: relative;
+    cursor: pointer;
+}
+
+.card img {
+    width: 100%;
+    border-radius: 20px;
+}
+
+/* SESIÓN */
 .login-btn {
     background: #8DE35F;
     padding: 10px 20px;
@@ -66,6 +96,52 @@ nav a {
     display: block;
     padding: 10px;
     color: white;
+}
+
+/* PERFIL HERO */
+.perfil-hero {
+    display: flex;
+    height: 80vh;
+}
+
+.perfil-texto {
+    width: 30%;
+    background: #0d6b2f;
+    padding: 40px;
+}
+
+.perfil-texto h1 {
+    color: yellow;
+    font-size: 50px;
+}
+
+.perfil-imagen {
+    width: 70%;
+    position: relative;
+}
+
+.perfil-imagen img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.perfil-botones {
+    position: absolute;
+    bottom: 30px;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.perfil-botones img {
+    width: 120px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.perfil-botones img:hover {
+    transform: scale(1.1);
 }
 
 /* ===== EDITAR PERFIL ===== */
@@ -137,34 +213,52 @@ nav a {
 
 <!-- INICIO -->
 <div id="inicio" class="section active">
-    <h2>Inicio</h2>
+    <div class="hero">
+        <img src="portada principal.jpeg">
+    </div>
+
+    <div class="contenedor-botones">
+        <div class="card" onclick="mostrar('cultivos')">
+            <img src="plantar.jpeg">
+        </div>
+
+        <div class="card" onclick="mostrar('recursos')">
+            <img src="sustentable.jpeg">
+        </div>
+
+        <div class="card" onclick="mostrar('proveedores')">
+            <img src="proveedores.jpeg">
+        </div>
+    </div>
 </div>
 
 <!-- PERFIL -->
 <div id="perfil" class="section">
-    <h2>Mi perfil</h2>
-    <h3 id="nombreBienvenida"></h3>
+    <div class="perfil-hero">
+
+        <div class="perfil-texto">
+            <h1>Bienvenida</h1>
+            <h2 id="nombreBienvenida"></h2>
+        </div>
+
+        <div class="perfil-imagen">
+            <img src="perfil-fondo.jpeg">
+
+            <div class="perfil-botones">
+                <img src="icono1.jpeg" onclick="mostrar('huerto')">
+                <img src="icono2.jpeg" onclick="mostrar('cultivos')">
+                <img src="icono3.jpeg" onclick="mostrar('proveedores')">
+            </div>
+        </div>
+
+    </div>
 </div>
 
 <!-- HUERTO -->
-<div id="huerto" class="section">
-    <h2>Mi Huerto</h2>
-</div>
-
-<!-- CULTIVOS -->
-<div id="cultivos" class="section">
-    <h2>Cultivos</h2>
-</div>
-
-<!-- RECURSOS -->
-<div id="recursos" class="section">
-    <h2>Recursos</h2>
-</div>
-
-<!-- PROVEEDORES -->
-<div id="proveedores" class="section">
-    <h2>Proveedores</h2>
-</div>
+<div id="huerto" class="section"><h2>Mi Huerto</h2></div>
+<div id="cultivos" class="section"><h2>Cultivos</h2></div>
+<div id="recursos" class="section"><h2>Recursos</h2></div>
+<div id="proveedores" class="section"><h2>Proveedores</h2></div>
 
 <!-- ===== EDITAR PERFIL ===== -->
 <div id="editarPerfil" class="section">
@@ -175,7 +269,7 @@ nav a {
 
         <div class="foto-container">
             <img id="fotoPreview" src="perfil.png">
-            <input type="file" accept="image/*" id="fotoInput">
+            <input type="file" id="fotoInput" accept="image/*">
         </div>
 
         <input type="text" id="nombreInput" placeholder="Nombre">
@@ -191,20 +285,19 @@ nav a {
         <p class="estado">💾 Guardado automático</p>
 
     </div>
-
 </div>
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
 
-    // ===== SECCIONES =====
+    // SECCIONES
     window.mostrar = function (id) {
         document.querySelectorAll(".section").forEach(sec => sec.classList.remove("active"));
         document.getElementById(id).classList.add("active");
         document.getElementById("dropdownMenu").style.display = "none";
     };
 
-    // ===== MENÚ =====
+    // MENÚ
     window.toggleMenu = function (event) {
         event.stopPropagation();
         let m = document.getElementById("dropdownMenu");
@@ -215,7 +308,7 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("dropdownMenu").style.display = "none";
     });
 
-    // ===== SESIÓN =====
+    // SESIÓN
     let user = localStorage.getItem("sesion");
 
     if (user) {
@@ -224,7 +317,7 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("nombreBienvenida").innerText = user;
     }
 
-    // ===== PERFIL =====
+    // PERFIL
     const nombreInput = document.getElementById("nombreInput");
     const zonaInput = document.getElementById("zonaInput");
     const fotoPreview = document.getElementById("fotoPreview");
@@ -233,9 +326,9 @@ document.addEventListener("DOMContentLoaded", () => {
     if (zonaInput) zonaInput.value = localStorage.getItem("zona") || "";
 
     let foto = localStorage.getItem("foto");
-    if (foto && fotoPreview) fotoPreview.src = foto;
+    if (foto) fotoPreview.src = foto;
 
-    // ===== GUARDADO AUTOMÁTICO =====
+    // GUARDADO AUTOMÁTICO
     nombreInput?.addEventListener("input", e => {
         localStorage.setItem("nombre", e.target.value);
     });
@@ -245,7 +338,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     document.getElementById("fotoInput")?.addEventListener("change", function () {
-        let file = this.files[0];
         let reader = new FileReader();
 
         reader.onload = function (e) {
@@ -253,10 +345,10 @@ document.addEventListener("DOMContentLoaded", () => {
             localStorage.setItem("foto", e.target.result);
         };
 
-        reader.readAsDataURL(file);
+        reader.readAsDataURL(this.files[0]);
     });
 
-    // ===== LOGOUT =====
+    // LOGOUT
     window.logout = function () {
         localStorage.removeItem("sesion");
         location.reload();
