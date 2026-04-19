@@ -98,43 +98,24 @@ nav a {
 }
 
 /* =========================
-   🔥 PERFIL CORREGIDO
+   🔥 PERFIL NUEVO SPLIT
 ========================= */
 
 .perfil-hero {
-    position: relative;
+    display: flex;
     width: 100%;
     height: 80vh;
-    overflow: hidden;
 }
 
-/* IMAGEN DE FONDO */
-.perfil-imagen {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-}
-
-.perfil-imagen img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-/* PANEL ENCIMA */
+/* IZQUIERDA */
 .perfil-texto {
-    position: absolute;
-    z-index: 10;
+    width: 30%;
+    background: rgba(13, 107, 47, 0.85);
+    padding: 40px;
 
-    width: 320px;
-    left: 50px;
-    top: 80px;
-
-    background: rgba(13, 107, 47, 0.75);
-    padding: 35px;
-    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .perfil-texto h1 {
@@ -142,7 +123,7 @@ nav a {
     font-size: 50px;
 }
 
-/* BOTONES EN COLUMNA */
+/* BOTONES */
 .perfil-botones-texto {
     margin-top: 20px;
     display: flex;
@@ -156,14 +137,26 @@ nav a {
     height: 60px;
     object-fit: contain;
     cursor: pointer;
-    border-radius: 10px;
     transition: 0.3s;
+    border-radius: 10px;
     background: rgba(255,255,255,0.05);
     padding: 5px;
 }
 
 .perfil-botones-texto img:hover {
     transform: scale(1.05);
+}
+
+/* DERECHA (IMAGEN) */
+.perfil-imagen {
+    width: 70%;
+    height: 100%;
+}
+
+.perfil-imagen img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* adapta 1600x1182 */
 }
 
 /* EDITAR PERFIL */
@@ -259,7 +252,7 @@ nav a {
 
     <div class="perfil-hero">
 
-        <!-- TEXTO -->
+        <!-- IZQUIERDA -->
         <div class="perfil-texto">
             <h1>Bienvenida</h1>
             <h2 id="nombreBienvenida"></h2>
@@ -271,7 +264,7 @@ nav a {
             </div>
         </div>
 
-        <!-- FONDO -->
+        <!-- DERECHA -->
         <div class="perfil-imagen">
             <img src="perfil-fondo.jpeg">
         </div>
