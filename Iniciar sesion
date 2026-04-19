@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Siembra Seguro</title>
+
+<style>
+body {
+    font-family: Arial;
+    background: #111;
+    color: white;
+    text-align: center;
+}
+
+.container {
+    margin-top: 100px;
+}
+
+input {
+    padding: 10px;
+    margin: 10px;
+    border-radius: 10px;
+    border: none;
+}
+
+button {
+    padding: 10px 20px;
+    background: #8DE35F;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+#perfil {
+    display: none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container" id="login">
+    <h1>Iniciar sesión</h1>
+    <input type="text" id="usuario" placeholder="Usuario"><br>
+    <input type="password" id="password" placeholder="Contraseña"><br>
+    <button onclick="login()">Entrar</button>
+</div>
+
+<div class="container" id="perfil">
+    <h1>Bienvenido</h1>
+    <p id="nombreUsuario"></p>
+    <button onclick="logout()">Cerrar sesión</button>
+</div>
+
+<script>
+function login() {
+    let user = document.getElementById("usuario").value;
+    let pass = document.getElementById("password").value;
+
+    if(user !== "" && pass !== "") {
+        localStorage.setItem("usuario", user);
+
+        document.getElementById("login").style.display = "none";
+        document.getElementById("perfil").style.display = "block";
+
+        document.getElementById("nombreUsuario").innerText = "Usuario: " + user;
+    } else {
+        alert("Completa los campos");
+    }
+}
+
+function logout() {
+    localStorage.removeItem("usuario");
+
+    document.getElementById("login").style.display = "block";
+    document.getElementById("perfil").style.display = "none";
+}
+
+// Mantener sesión
+window.onload = function() {
+    let user = localStorage.getItem("usuario");
+
+    if(user) {
+        document.getElementById("login").style.display = "none";
+        document.getElementById("perfil").style.display = "block";
+        document.getElementById("nombreUsuario").innerText = "Usuario: " + user;
+    }
+}
+</script>
+
+</body>
+</html>
