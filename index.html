@@ -12,21 +12,56 @@ body {
     color: white;
 }
 
-/* NAV */
-nav {
-    background: #2e6b12;
-    padding: 15px;
-    display: flex;
-    justify-content: space-between;
+/* NAV GENERAL AJUSTADO */
+nav{
+    background:#2e6b12;
+    padding:10px 15px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
 }
 
-nav a {
-    color: white;
-    margin: 10px;
-    cursor: pointer;
-    text-decoration: none;
+/* LADO IZQUIERDO */
+.nav-left{
+    display:flex;
+    align-items:center;
+    gap:20px;
 }
 
+/* LOGO */
+.logo{
+    height:50px;
+    cursor:pointer;
+}
+
+.logo-link{
+    display:flex;
+    align-items:center;
+}
+
+/* LINKS DEL MENU */
+.menu-links{
+    display:flex;
+    gap:15px;
+}
+
+.menu-links a{
+    color:white;
+    text-decoration:none;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.menu-links a:hover{
+    text-decoration:underline;
+}
+
+/* LADO DERECHO */
+.nav-right{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
 /* SECCIONES */
 .section {
     display: none;
@@ -205,14 +240,26 @@ nav a {
 <body>
 
 <nav>
-    <div>
-        <a onclick="mostrar('inicio')">Inicio</a>
-        <a onclick="mostrar('cultivos')">Cultivos</a>
-        <a onclick="mostrar('recursos')">Recursos</a>
-        <a onclick="mostrar('proveedores')">Proveedores</a>
+    <!-- IZQUIERDA: LOGO + MENÚ -->
+    <div class="nav-left">
+
+        <!-- LOGO (BOTÓN INICIO) -->
+        <a onclick="mostrar('inicio')" class="logo-link">
+            <img src="logo.png" class="logo">
+        </a>
+
+        <!-- MENÚ A LADO DEL LOGO -->
+        <div class="menu-links">
+            <a onclick="mostrar('cultivos')">Cultivos</a>
+            <a onclick="mostrar('recursos')">Recursos</a>
+            <a onclick="mostrar('proveedores')">Proveedores</a>
+        </div>
+
     </div>
 
-    <div>
+    <!-- DERECHA: SESIÓN / PERFIL -->
+    <div class="nav-right">
+
         <a href="login.html" id="btnSesion" class="login-btn">Sesión</a>
 
         <div id="perfilMenu" style="display:none;" class="perfil-container">
@@ -225,6 +272,7 @@ nav a {
                 <a onclick="logout()">Cerrar sesión</a>
             </div>
         </div>
+
     </div>
 </nav>
 
