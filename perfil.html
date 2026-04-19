@@ -12,19 +12,33 @@ body {
     color: white;
 }
 
-/* CONTENEDOR */
-.container {
+/* NAV */
+nav {
+    background: #2e6b12;
+    padding: 15px;
     display: flex;
-    height: 100vh;
+    justify-content: space-between;
+    align-items: center;
 }
 
-/* LADO IZQUIERDO (BOTONES) */
+nav a {
+    color: white;
+    margin: 10px;
+    text-decoration: none;
+}
+
+/* PERFIL */
+.container {
+    display: flex;
+    height: calc(100vh - 70px);
+}
+
+/* BOTONES */
 .menu {
     width: 250px;
     padding: 20px;
 }
 
-/* BOTONES */
 .boton {
     display: flex;
     align-items: center;
@@ -33,17 +47,15 @@ body {
     color: black;
     padding: 15px;
     border-radius: 15px;
-    margin-bottom: 100px; /* ≈ espacio grande entre botones */
+    margin-bottom: 100px;
     cursor: pointer;
 }
 
-/* ICONOS */
 .boton img {
     width: 30px;
-    height: 30px;
 }
 
-/* LADO DERECHO (IMAGEN) */
+/* CONTENIDO */
 .contenido {
     flex: 1;
     display: flex;
@@ -55,14 +67,61 @@ body {
     max-width: 80%;
     border-radius: 20px;
 }
+
+/* ICONO PERFIL */
+.perfil-container {
+    position: relative;
+}
+
+.icono {
+    width: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.dropdown {
+    display: none;
+    position: absolute;
+    right: 0;
+    background: #2e6b12;
+    border-radius: 10px;
+}
+
+.dropdown a {
+    display: block;
+    padding: 10px;
+    color: white;
+}
 </style>
 </head>
 
 <body>
 
+<!-- NAVBAR -->
+<nav>
+    <div>
+        <a href="index.html">Inicio</a>
+        <a href="index.html#cultivos">Cultivos</a>
+        <a href="index.html#recursos">Recursos</a>
+        <a href="index.html#proveedores">Proveedores</a>
+    </div>
+
+    <div>
+        <div class="perfil-container">
+            <img src="perfil.png" class="icono" onclick="toggleMenu()">
+
+            <div class="dropdown" id="menu">
+                <a href="perfil.html">Mi perfil</a>
+                <a href="index.html#huerto">Mi huerto</a>
+                <a onclick="logout()">Cerrar sesión</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- CONTENIDO -->
 <div class="container">
 
-    <!-- BOTONES -->
     <div class="menu">
         <div class="boton">
             <img src="icono1.png">
@@ -80,7 +139,6 @@ body {
         </div>
     </div>
 
-    <!-- IMAGEN -->
     <div class="contenido">
         <img src="perfil-fondo.jpg">
     </div>
@@ -88,6 +146,11 @@ body {
 </div>
 
 <script>
+function toggleMenu() {
+    let m = document.getElementById("menu");
+    m.style.display = m.style.display === "block" ? "none" : "block";
+}
+
 function logout() {
     localStorage.removeItem("sesion");
     window.location.href = "index.html";
