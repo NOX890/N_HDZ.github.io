@@ -151,15 +151,6 @@ nav a {
 .perfil-botones img:hover {
     transform: scale(1.1);
 }
-
-/* FORM */
-input, select {
-    display: block;
-    margin: 10px 0;
-    padding: 10px;
-    border-radius: 10px;
-    border: none;
-}
 </style>
 </head>
 
@@ -197,17 +188,14 @@ input, select {
     <div class="contenedor-botones">
         <div class="card" onclick="mostrar('cultivos')">
             <img src="plantar.jpeg">
-            <div class="texto-card">¿Qué puedo plantar?</div>
         </div>
 
         <div class="card" onclick="mostrar('recursos')">
             <img src="sustentable.jpeg">
-            <div class="texto-card">Huerto sustentable</div>
         </div>
 
         <div class="card" onclick="mostrar('proveedores')">
             <img src="proveedores.jpeg">
-            <div class="texto-card">Proveedores</div>
         </div>
     </div>
 </div>
@@ -267,7 +255,6 @@ function toggleMenu() {
     m.style.display = m.style.display === "block" ? "none" : "block";
 }
 
-/* SESIÓN */
 window.onload = function() {
     let user = localStorage.getItem("sesion");
 
