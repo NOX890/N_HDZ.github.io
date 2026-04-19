@@ -37,53 +37,14 @@ nav a {
     display: block;
 }
 
-/* PORTADA */
-.hero {
-    display: flex;
-    justify-content: center;
-    padding: 20px;
-}
-
-.hero img {
-    max-width: 90%;
-    border-radius: 20px;
-}
-
-/* BOTONES */
-.contenedor-botones {
-    display: flex;
-    justify-content: space-around;
-    padding: 30px;
-}
-
-.card {
-    width: 28%;
-    position: relative;
-    cursor: pointer;
-}
-
-.card img {
-    width: 100%;
-    border-radius: 20px;
-}
-
-.texto-card {
-    position: absolute;
-    bottom: 10px;
-    left: 10px;
-    background: rgba(0,0,0,0.5);
-    padding: 5px;
-    border-radius: 10px;
-}
-
-/* SESIÓN */
+/* LOGIN BTN */
 .login-btn {
     background: #8DE35F;
     padding: 10px 20px;
     border-radius: 20px;
 }
 
-/* PERFIL NAV */
+/* PERFIL MENU */
 .perfil-container {
     position: relative;
 }
@@ -104,52 +65,46 @@ nav a {
 .dropdown a {
     display: block;
     padding: 10px;
+    color: white;
 }
 
-/* PERFIL DISEÑO */
-.perfil-hero {
-    display: flex;
-    height: 80vh;
+/* ===== EDITAR PERFIL ===== */
+.perfil-edit{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    height:80vh;
+    gap:15px;
+    text-align:center;
 }
 
-.perfil-texto {
-    width: 30%;
-    background: #0d6b2f;
-    padding: 40px;
+.perfil-edit input,
+.perfil-edit select{
+    width:250px;
+    padding:10px;
+    border-radius:10px;
+    border:none;
 }
 
-.perfil-texto h1 {
-    color: yellow;
-    font-size: 50px;
+.foto-container{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:10px;
 }
 
-.perfil-imagen {
-    width: 70%;
-    position: relative;
+.foto-container img{
+    width:120px;
+    height:120px;
+    border-radius:50%;
+    object-fit:cover;
+    border:3px solid white;
 }
 
-.perfil-imagen img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.perfil-botones {
-    position: absolute;
-    bottom: 30px;
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-}
-
-.perfil-botones img {
-    width: 120px;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.perfil-botones img:hover {
-    transform: scale(1.1);
+.estado{
+    font-size:12px;
+    opacity:0.8;
 }
 </style>
 </head>
@@ -162,13 +117,14 @@ nav a {
         <a onclick="mostrar('cultivos')">Cultivos</a>
         <a onclick="mostrar('recursos')">Recursos</a>
         <a onclick="mostrar('proveedores')">Proveedores</a>
+        <a onclick="mostrar('editarPerfil')">Editar perfil</a>
     </div>
 
     <div>
         <a href="login.html" id="btnSesion" class="login-btn">Sesión</a>
 
         <div id="perfilMenu" style="display:none;" class="perfil-container">
-            <img src="perfil.png" class="icono" onclick="toggleMenu()">
+            <img src="perfil.png" class="icono" onclick="toggleMenu(event)">
 
             <div id="dropdownMenu" class="dropdown">
                 <a onclick="mostrar('perfil')">Mi perfil</a>
@@ -181,47 +137,13 @@ nav a {
 
 <!-- INICIO -->
 <div id="inicio" class="section active">
-    <div class="hero">
-        <img src="portada principal.jpeg">
-    </div>
-
-    <div class="contenedor-botones">
-        <div class="card" onclick="mostrar('cultivos')">
-            <img src="plantar.jpeg">
-        </div>
-
-        <div class="card" onclick="mostrar('recursos')">
-            <img src="sustentable.jpeg">
-        </div>
-
-        <div class="card" onclick="mostrar('proveedores')">
-            <img src="proveedores.jpeg">
-        </div>
-    </div>
+    <h2>Inicio</h2>
 </div>
 
 <!-- PERFIL -->
 <div id="perfil" class="section">
-
-    <div class="perfil-hero">
-
-        <div class="perfil-texto">
-            <h1>Bienvenida</h1>
-            <h2 id="nombreBienvenida"></h2>
-        </div>
-
-        <div class="perfil-imagen">
-            <img src="perfil-fondo.jpeg">
-
-            <div class="perfil-botones">
-                <img src="icono1.jpeg" onclick="mostrar('huerto')">
-                <img src="icono2.jpeg" onclick="mostrar('cultivos')">
-                <img src="icono3.jpeg" onclick="mostrar('proveedores')">
-            </div>
-        </div>
-
-    </div>
-
+    <h2>Perfil</h2>
+    <h3 id="nombreBienvenida"></h3>
 </div>
 
 <!-- HUERTO -->
@@ -244,18 +166,52 @@ nav a {
     <h2>Proveedores</h2>
 </div>
 
+<!-- ===== EDITAR PERFIL ===== -->
+<div id="editarPerfil" class="section">
+
+    <div class="perfil-edit">
+
+        <h2>Editar perfil</h2>
+
+        <div class="foto-container">
+            <img id="fotoPreview" src="perfil.png">
+            <input type="file" accept="image/*" id="fotoInput">
+        </div>
+
+        <input type="text" id="nombreInput" placeholder="Nombre">
+
+        <select id="zonaInput">
+            <option value="">Zona climática 🌎</option>
+            <option>Desértica 🌵</option>
+            <option>Tropical 🌴</option>
+            <option>Templada 🌿</option>
+            <option>Fría ❄️</option>
+        </select>
+
+        <p class="estado">💾 Guardado automático</p>
+
+    </div>
+
+</div>
+
 <script>
 function mostrar(id) {
     document.querySelectorAll(".section").forEach(sec => sec.classList.remove("active"));
     document.getElementById(id).classList.add("active");
+    document.getElementById("dropdownMenu").style.display = "none";
 }
 
-function toggleMenu() {
+function toggleMenu(event) {
+    event.stopPropagation();
     let m = document.getElementById("dropdownMenu");
     m.style.display = m.style.display === "block" ? "none" : "block";
 }
 
-window.onload = function() {
+document.addEventListener("click", function () {
+    document.getElementById("dropdownMenu").style.display = "none";
+});
+
+window.onload = function () {
     let user = localStorage.getItem("sesion");
 
     if(user) {
@@ -263,7 +219,37 @@ window.onload = function() {
         document.getElementById("perfilMenu").style.display = "inline-block";
         document.getElementById("nombreBienvenida").innerText = user;
     }
-}
+
+    // cargar perfil
+    document.getElementById("nombreInput").value = localStorage.getItem("nombre") || "";
+    document.getElementById("zonaInput").value = localStorage.getItem("zona") || "";
+
+    let foto = localStorage.getItem("foto");
+    if (foto) document.getElementById("fotoPreview").src = foto;
+};
+
+// guardar nombre
+document.getElementById("nombreInput").addEventListener("input", e => {
+    localStorage.setItem("nombre", e.target.value);
+});
+
+// guardar zona
+document.getElementById("zonaInput").addEventListener("change", e => {
+    localStorage.setItem("zona", e.target.value);
+});
+
+// foto
+document.getElementById("fotoInput").addEventListener("change", function () {
+    let file = this.files[0];
+    let reader = new FileReader();
+
+    reader.onload = function (e) {
+        document.getElementById("fotoPreview").src = e.target.result;
+        localStorage.setItem("foto", e.target.result);
+    };
+
+    reader.readAsDataURL(file);
+});
 
 function logout() {
     localStorage.removeItem("sesion");
