@@ -12,7 +12,7 @@ body {
     display: flex;
 }
 
-/* IZQUIERDA (LOGIN) */
+/* IZQUIERDA */
 .login-section {
     width: 40%;
     background: #408A19;
@@ -29,14 +29,13 @@ body {
     color: white;
 }
 
-/* DERECHA (IMAGEN) */
+/* DERECHA */
 .image-section {
     width: 60%;
     background: url("iniciar-sesion.jpeg") center/contain no-repeat;
     background-color: #2e6b12;
 }
 
-/* INPUTS */
 input, select {
     width: 100%;
     padding: 10px;
@@ -45,7 +44,6 @@ input, select {
     border: none;
 }
 
-/* BOTONES */
 button {
     width: 100%;
     padding: 10px;
@@ -56,12 +54,10 @@ button {
     margin-top: 10px;
 }
 
-/* TITULOS */
 h2, h3 {
     text-align: center;
 }
 
-/* PASSWORD */
 .pass-container {
     position: relative;
 }
@@ -71,68 +67,64 @@ h2, h3 {
     right: 10px;
     top: 12px;
     cursor: pointer;
-    color: black;
 }
 </style>
 </head>
 
 <body>
 
-<!-- IZQUIERDA -->
 <div class="login-section">
+<div class="login-box">
 
-    <div class="login-box">
+<h2>Iniciar Sesión</h2>
 
-        <h2>Iniciar Sesión</h2>
+<input id="loginUser" placeholder="Usuario">
 
-        <input id="loginUser" placeholder="Usuario">
-
-        <div class="pass-container">
-            <input id="loginPass" type="password" placeholder="Contraseña">
-            <span class="ver-pass" onclick="togglePass('loginPass')">👁️</span>
-        </div>
-
-        <button onclick="login()">Entrar</button>
-
-        <h3>Crear cuenta</h3>
-
-        <input id="newUser" placeholder="Usuario">
-
-        <div class="pass-container">
-            <input id="newPass" type="password" placeholder="Contraseña">
-            <span class="ver-pass" onclick="togglePass('newPass')">👁️</span>
-        </div>
-
-        <select id="newZona">
-            <option value="">Zona climática</option>
-            <option value="arida">Árida</option>
-            <option value="semiarida">Semiárida</option>
-            <option value="templada">Templada</option>
-            <option value="humeda">Húmeda</option>
-            <option value="tropical">Tropical</option>
-        </select>
-
-        <button onclick="crearCuenta()">Registrar</button>
-
-    </div>
-
+<div class="pass-container">
+<input id="loginPass" type="password" placeholder="Contraseña">
+<span class="ver-pass" onclick="togglePass('loginPass')">👁️</span>
 </div>
 
-<!-- DERECHA -->
+<button onclick="login()">Entrar</button>
+
+<h3>Crear cuenta</h3>
+
+<input id="newUser" placeholder="Usuario">
+
+<div class="pass-container">
+<input id="newPass" type="password" placeholder="Contraseña">
+<span class="ver-pass" onclick="togglePass('newPass')">👁️</span>
+</div>
+
+<select id="newZona">
+<option value="">Zona climática</option>
+<option>Árida</option>
+<option>Semiárida</option>
+<option>Templada</option>
+<option>Húmeda</option>
+<option>Tropical</option>
+</select>
+
+<button onclick="crearCuenta()">Registrar</button>
+
+</div>
+</div>
+
 <div class="image-section"></div>
 
 <script>
-function togglePass(id) {
+function togglePass(id){
     let input = document.getElementById(id);
     input.type = input.type === "password" ? "text" : "password";
 }
 
-function crearCuenta() {
+/* CREAR CUENTA */
+function crearCuenta(){
     let user = newUser.value;
     let pass = newPass.value;
     let zona = newZona.value;
 
-    if(!user || !pass || !zona) {
+    if(!user || !pass || !zona){
         alert("Completa todos los campos");
         return;
     }
@@ -141,21 +133,26 @@ function crearCuenta() {
     localStorage.setItem("pass", pass);
     localStorage.setItem("zonaPerfil", zona);
 
-    alert("Cuenta creada");
+    alert("Cuenta creada correctamente");
 }
 
-function login() {
+/* LOGIN */
+function login(){
     let user = loginUser.value;
     let pass = loginPass.value;
 
-    if(user === localStorage.getItem("user") &&
-       pass === localStorage.getItem("pass")) {
+    let savedUser = localStorage.getItem("user");
+    let savedPass = localStorage.getItem("pass");
 
+    if(user === savedUser && pass === savedPass){
+
+        /* 🔥 ESTA ES LA CLAVE */
         localStorage.setItem("sesion", user);
+
         window.location.href = "index.html";
 
     } else {
-        alert("Datos incorrectos");
+        alert("Usuario o contraseña incorrectos");
     }
 }
 </script>
