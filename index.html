@@ -2,23 +2,65 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Mi primera página</title>
+    <title>Siembra Seguro</title>
+
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: Arial;
-            text-align: center;
-            background-color: #111;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             color: white;
         }
+
+        .container {
+            text-align: center;
+        }
+
         h1 {
-            color: cyan;
+            font-size: 60px;
+            color: #00ff9f;
+        }
+
+        p {
+            margin-top: 15px;
+            font-size: 20px;
+            color: #ccc;
+        }
+
+        .btn {
+            margin-top: 30px;
+            padding: 15px 30px;
+            background: #00ff9f;
+            color: #000;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 30px;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #00cc7a;
         }
     </style>
 </head>
+
 <body>
 
-    <h1>Hola, soy Fernanda 👋</h1>
-    <p>Esta es mi primera página web en GitHub</p>
+    <div class="container">
+        <h1>🌱 Siembra Seguro</h1>
+        <p>Tecnología para un cultivo inteligente y sustentable</p>
+
+        <a href="#" class="btn">Comenzar</a>
+    </div>
 
 </body>
 </html>
