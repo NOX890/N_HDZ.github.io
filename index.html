@@ -9,14 +9,40 @@ body {
     margin: 0;
     font-family: Arial;
     background: #111;
+    color: white;
 }
 
-/* CONTENEDOR PRINCIPAL */
+/* NAVBAR */
+nav {
+    background: #000;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+nav a {
+    color: white;
+    margin: 10px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* SECCIONES */
+.section {
+    display: none;
+    padding: 40px;
+}
+
+.active {
+    display: block;
+}
+
+/* PORTADA NUEVA (IMAGEN CENTRADA) */
 .hero {
     height: 100vh;
     display: flex;
-    justify-content: center; /* centra horizontal */
-    align-items: center;     /* centra vertical */
+    justify-content: center;
+    align-items: center;
     position: relative;
 }
 
@@ -28,26 +54,170 @@ body {
     object-fit: cover;
 }
 
-/* TEXTO (para que lo uses después) */
+/* BOTÓN */
+.btn {
+    position: absolute;
+    bottom: 50px;
+    padding: 15px 30px;
+    background: #8DE35F;
+    color: black;
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+/* TEXTO OPCIONAL */
 .texto {
     position: absolute;
     color: white;
     font-size: 40px;
     font-weight: bold;
+    top: 50px;
+}
+
+/* FORMULARIOS */
+input {
+    display: block;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+}
+
+button {
+    padding: 10px;
+    background: #8DE35F;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
 }
 </style>
 </head>
 
 <body>
 
-<div class="hero">
+<!-- NAV -->
+<nav>
+    <div>
+        <a onclick="mostrar('inicio')">Inicio</a>
+        <a onclick="mostrar('cultivos')">Cultivos</a>
+        <a onclick="mostrar('recursos')">Recursos</a>
+        <a onclick="mostrar('proveedores')">Proveedores</a>
+    </div>
+
+    <div>
+        <a onclick="mostrar('perfil')">Perfil</a>
+        <a onclick="mostrar('huerto')">Mi Huerto</a>
+    </div>
+</nav>
+
+<!-- PORTADA -->
+<div id="inicio" class="section active hero">
+    
     <img src="portada principal.jpeg" alt="Portada">
 
-    <!-- AQUÍ PUEDES AGREGAR TEXTO -->
+    <!-- TEXTO (OPCIONAL) -->
     <div class="texto">
         <!-- Escribe aquí -->
     </div>
+
+    <div class="btn" onclick="mostrar('login')">Iniciar</div>
 </div>
+
+<!-- LOGIN -->
+<div id="login" class="section">
+    <h2>Iniciar Sesión</h2>
+    <input id="loginUser" placeholder="Usuario">
+    <input id="loginPass" type="password" placeholder="Contraseña">
+    <button onclick="login()">Entrar</button>
+
+    <h3>Crear cuenta</h3>
+    <input id="newUser" placeholder="Nuevo usuario">
+    <input id="newPass" type="password" placeholder="Nueva contraseña">
+    <button onclick="crearCuenta()">Registrar</button>
+</div>
+
+<!-- PERFIL -->
+<div id="perfil" class="section">
+    <h2>Perfil</h2>
+    <p id="infoUsuario"></p>
+    <button onclick="logout()">Cerrar sesión</button>
+</div>
+
+<!-- MI HUERTO -->
+<div id="huerto" class="section">
+    <h2>Mi Huerto</h2>
+    <input id="planta" placeholder="Agregar cultivo">
+    <button onclick="agregarPlanta()">Agregar</button>
+    <ul id="listaPlantas"></ul>
+</div>
+
+<!-- CULTIVOS -->
+<div id="cultivos" class="section">
+    <h2>Cultivos</h2>
+    <p>Información sobre cultivos inteligentes 🌱</p>
+</div>
+
+<!-- RECURSOS -->
+<div id="recursos" class="section">
+    <h2>Recursos Sustentables</h2>
+    <p>Uso eficiente del agua, energía y suelo ♻️</p>
+</div>
+
+<!-- PROVEEDORES -->
+<div id="proveedores" class="section">
+    <h2>Carta de Proveedores</h2>
+    <p>Lista de proveedores agrícolas confiables 📄</p>
+</div>
+
+<script>
+function mostrar(id) {
+    document.querySelectorAll(".section").forEach(sec => sec.classList.remove("active"));
+    document.getElementById(id).classList.add("active");
+}
+
+/* LOGIN */
+function crearCuenta() {
+    let user = document.getElementById("newUser").value;
+    let pass = document.getElementById("newPass").value;
+
+    localStorage.setItem("user", user);
+    localStorage.setItem("pass", pass);
+
+    alert("Cuenta creada");
+}
+
+function login() {
+    let user = document.getElementById("loginUser").value;
+    let pass = document.getElementById("loginPass").value;
+
+    let savedUser = localStorage.getItem("user");
+    let savedPass = localStorage.getItem("pass");
+
+    if(user === savedUser && pass === savedPass) {
+        localStorage.setItem("sesion", user);
+        mostrar("perfil");
+        document.getElementById("infoUsuario").innerText = "Usuario: " + user;
+    } else {
+        alert("Datos incorrectos");
+    }
+}
+
+function logout() {
+    localStorage.removeItem("sesion");
+    mostrar("inicio");
+}
+
+/* HUERTO */
+function agregarPlanta() {
+    let planta = document.getElementById("planta").value;
+
+    let lista = document.getElementById("listaPlantas");
+    let item = document.createElement("li");
+    item.textContent = planta;
+
+    lista.appendChild(item);
+}
+</script>
 
 </body>
 </html>
