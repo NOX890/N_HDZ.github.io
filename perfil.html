@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Mi Perfil</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial;
+    background: #408A19;
+    color: white;
+}
+
+/* CONTENEDOR */
+.container {
+    display: flex;
+    height: 100vh;
+}
+
+/* LADO IZQUIERDO (BOTONES) */
+.menu {
+    width: 250px;
+    padding: 20px;
+}
+
+/* BOTONES */
+.boton {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #8DE35F;
+    color: black;
+    padding: 15px;
+    border-radius: 15px;
+    margin-bottom: 100px; /* ≈ espacio grande entre botones */
+    cursor: pointer;
+}
+
+/* ICONOS */
+.boton img {
+    width: 30px;
+    height: 30px;
+}
+
+/* LADO DERECHO (IMAGEN) */
+.contenido {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contenido img {
+    max-width: 80%;
+    border-radius: 20px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- BOTONES -->
+    <div class="menu">
+        <div class="boton">
+            <img src="icono1.png">
+            <span>Datos</span>
+        </div>
+
+        <div class="boton">
+            <img src="icono2.png">
+            <span>Configuración</span>
+        </div>
+
+        <div class="boton" onclick="logout()">
+            <img src="icono3.png">
+            <span>Cerrar sesión</span>
+        </div>
+    </div>
+
+    <!-- IMAGEN -->
+    <div class="contenido">
+        <img src="perfil-fondo.jpg">
+    </div>
+
+</div>
+
+<script>
+function logout() {
+    localStorage.removeItem("sesion");
+    window.location.href = "index.html";
+}
+</script>
+
+</body>
+</html>
