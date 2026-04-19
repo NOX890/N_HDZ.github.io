@@ -125,6 +125,24 @@ input, select {
     border-radius: 10px;
     border: none;
 }
+
+/* FILA PERFIL */
+.fila-perfil {
+    display: flex;
+    align-items: end;
+    gap: 20px;
+}
+
+/* BOTÓN GUARDAR */
+.btn-guardar {
+    height: 40px;
+    margin-top: 20px;
+    background: #8DE35F;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    padding: 0 15px;
+}
 </style>
 </head>
 
@@ -161,17 +179,17 @@ input, select {
 
     <div class="contenedor-botones">
         <div class="card" onclick="mostrar('cultivos')">
-            <img src="plantar.jpeg">
+            <img src="plantar.jpg">
             <div class="texto-card">¿Qué puedo plantar?</div>
         </div>
 
         <div class="card" onclick="mostrar('recursos')">
-            <img src="sustentable.jpeg">
+            <img src="sustentable.jpg">
             <div class="texto-card">Huerto sustentable</div>
         </div>
 
         <div class="card" onclick="mostrar('proveedores')">
-            <img src="proveedores.jpeg">
+            <img src="proveedores.jpg">
             <div class="texto-card">Proveedores</div>
         </div>
     </div>
@@ -188,17 +206,23 @@ input, select {
     </div>
 
     <label>Nombre:</label>
-    <input id="nombreUsuario" oninput="guardarPerfil()">
+    <input id="nombreUsuario">
 
-    <label>Zona climática:</label>
-    <select id="zonaUsuario" onchange="guardarPerfil()">
-        <option value="">Selecciona</option>
-        <option value="arida">Árida</option>
-        <option value="semiarida">Semiárida</option>
-        <option value="templada">Templada</option>
-        <option value="humeda">Húmeda</option>
-        <option value="tropical">Tropical</option>
-    </select>
+    <div class="fila-perfil">
+        <div>
+            <label>Zona climática:</label>
+            <select id="zonaUsuario">
+                <option value="">Selecciona</option>
+                <option value="arida">Árida</option>
+                <option value="semiarida">Semiárida</option>
+                <option value="templada">Templada</option>
+                <option value="humeda">Húmeda</option>
+                <option value="tropical">Tropical</option>
+            </select>
+        </div>
+
+        <button onclick="guardarPerfil()" class="btn-guardar">Guardar</button>
+    </div>
 
 </div>
 
@@ -240,6 +264,7 @@ function toggleMenu() {
 function guardarPerfil() {
     localStorage.setItem("nombrePerfil", document.getElementById("nombreUsuario").value);
     localStorage.setItem("zonaPerfil", document.getElementById("zonaUsuario").value);
+    alert("Perfil guardado");
 }
 
 function cambiarFoto(e) {
