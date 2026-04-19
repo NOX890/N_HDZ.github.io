@@ -2,50 +2,148 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Login</title>
+<title>Login - Siembra Seguro</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial;
+    background: #408A19;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* CONTENEDOR */
+.login-box {
+    background: #2e6b12;
+    padding: 30px;
+    border-radius: 20px;
+    width: 300px;
+    color: white;
+}
+
+/* INPUTS */
+input, select {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border-radius: 10px;
+    border: none;
+}
+
+/* BOTONES */
+button {
+    width: 100%;
+    padding: 10px;
+    background: #8DE35F;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+/* TITULOS */
+h2, h3 {
+    text-align: center;
+}
+
+/* PASSWORD */
+.pass-container {
+    position: relative;
+}
+
+.ver-pass {
+    position: absolute;
+    right: 10px;
+    top: 12px;
+    cursor: pointer;
+    color: black;
+}
+</style>
 </head>
 
 <body>
 
-<h2>Iniciar Sesión</h2>
-<input id="loginUser" placeholder="Usuario">
-<input id="loginPass" type="password" placeholder="Contraseña">
-<button onclick="login()">Entrar</button>
+<div class="login-box">
 
-<h3>Crear cuenta</h3>
-<input id="newUser" placeholder="Usuario">
-<input id="newPass" type="password" placeholder="Contraseña">
+    <h2>Iniciar Sesión</h2>
 
-<!-- NUEVO -->
-<select id="newZona">
-    <option value="">Zona climática</option>
-    <option value="arida">Árida</option>
-    <option value="semiarida">Semiárida</option>
-    <option value="templada">Templada</option>
-    <option value="humeda">Húmeda</option>
-    <option value="tropical">Tropical</option>
-</select>
+    <input id="loginUser" placeholder="Usuario">
 
-<button onclick="crearCuenta()">Registrar</button>
+    <div class="pass-container">
+        <input id="loginPass" type="password" placeholder="Contraseña">
+        <span class="ver-pass" onclick="togglePass('loginPass')">👁️</span>
+    </div>
+
+    <button onclick="login()">Entrar</button>
+
+    <h3>Crear cuenta</h3>
+
+    <input id="newUser" placeholder="Usuario">
+
+    <div class="pass-container">
+        <input id="newPass" type="password" placeholder="Contraseña">
+        <span class="ver-pass" onclick="togglePass('newPass')">👁️</span>
+    </div>
+
+    <!-- ZONA -->
+    <select id="newZona">
+        <option value="">Zona climática</option>
+        <option value="arida">Árida</option>
+        <option value="semiarida">Semiárida</option>
+        <option value="templada">Templada</option>
+        <option value="humeda">Húmeda</option>
+        <option value="tropical">Tropical</option>
+    </select>
+
+    <button onclick="crearCuenta()">Registrar</button>
+
+</div>
 
 <script>
+
+/* MOSTRAR CONTRASEÑA */
+function togglePass(id) {
+    let input = document.getElementById(id);
+    input.type = input.type === "password" ? "text" : "password";
+}
+
+/* REGISTRO */
 function crearCuenta() {
-    localStorage.setItem("user", newUser.value);
-    localStorage.setItem("pass", newPass.value);
-    localStorage.setItem("zonaPerfil", newZona.value); // SOLO agregado
+    let user = newUser.value;
+    let pass = newPass.value;
+    let zona = newZona.value;
+
+    if(!user || !pass || !zona) {
+        alert("Completa todos los campos");
+        return;
+    }
+
+    localStorage.setItem("user", user);
+    localStorage.setItem("pass", pass);
+    localStorage.setItem("zonaPerfil", zona);
+
     alert("Cuenta creada");
 }
 
+/* LOGIN */
 function login() {
-    if(loginUser.value === localStorage.getItem("user") &&
-       loginPass.value === localStorage.getItem("pass")) {
+    let user = loginUser.value;
+    let pass = loginPass.value;
 
-        localStorage.setItem("sesion", loginUser.value);
+    if(user === localStorage.getItem("user") &&
+       pass === localStorage.getItem("pass")) {
+
+        localStorage.setItem("sesion", user);
         window.location.href = "index.html";
+
     } else {
-        alert("Error");
+        alert("Datos incorrectos");
     }
 }
+
 </script>
 
 </body>
