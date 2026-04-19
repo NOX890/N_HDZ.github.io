@@ -8,16 +8,17 @@
 body {
     margin: 0;
     font-family: Arial;
-    background: #111;
+    background: #408A19;
     color: white;
 }
 
-/* NAVBAR */
+/* NAV */
 nav {
-    background: #000;
+    background: #2e6b12;
     padding: 15px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 nav a {
@@ -37,58 +38,25 @@ nav a {
     display: block;
 }
 
-/* PORTADA NUEVA (IMAGEN CENTRADA) */
+/* PORTADA */
 .hero {
-    height: 100vh;
+    height: 90vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    position: relative;
 }
 
-/* IMAGEN */
 .hero img {
     max-width: 90%;
     max-height: 90%;
     border-radius: 20px;
-    object-fit: cover;
 }
 
-/* BOTÓN */
-.btn {
-    position: absolute;
-    bottom: 50px;
-    padding: 15px 30px;
+/* BOTÓN LOGIN */
+.login-btn {
     background: #8DE35F;
-    color: black;
-    border-radius: 30px;
-    cursor: pointer;
-}
-
-/* TEXTO OPCIONAL */
-.texto {
-    position: absolute;
-    color: white;
-    font-size: 40px;
-    font-weight: bold;
-    top: 50px;
-}
-
-/* FORMULARIOS */
-input {
-    display: block;
-    margin: 10px 0;
-    padding: 10px;
-    border-radius: 10px;
-    border: none;
-}
-
-button {
-    padding: 10px;
-    background: #8DE35F;
-    border: none;
+    padding: 10px 20px;
     border-radius: 20px;
-    cursor: pointer;
 }
 </style>
 </head>
@@ -104,46 +72,24 @@ button {
         <a onclick="mostrar('proveedores')">Proveedores</a>
     </div>
 
-    <div>
-        <a onclick="mostrar('perfil')">Perfil</a>
-        <a onclick="mostrar('huerto')">Mi Huerto</a>
+    <div id="nav-derecha">
+        <a href="login.html" class="login-btn" id="btnSesion">Sesión</a>
     </div>
 </nav>
 
 <!-- PORTADA -->
 <div id="inicio" class="section active hero">
-    
-    <img src="portada principal.jpeg" alt="Portada">
-
-    <!-- TEXTO (OPCIONAL) -->
-    <div class="texto">
-        <!-- Escribe aquí -->
-    </div>
-
-    <div class="btn" onclick="mostrar('login')">Iniciar</div>
-</div>
-
-<!-- LOGIN -->
-<div id="login" class="section">
-    <h2>Iniciar Sesión</h2>
-    <input id="loginUser" placeholder="Usuario">
-    <input id="loginPass" type="password" placeholder="Contraseña">
-    <button onclick="login()">Entrar</button>
-
-    <h3>Crear cuenta</h3>
-    <input id="newUser" placeholder="Nuevo usuario">
-    <input id="newPass" type="password" placeholder="Nueva contraseña">
-    <button onclick="crearCuenta()">Registrar</button>
+    <img src="portada principal.jpeg">
 </div>
 
 <!-- PERFIL -->
 <div id="perfil" class="section">
-    <h2>Perfil</h2>
+    <h2>Mi Perfil</h2>
     <p id="infoUsuario"></p>
     <button onclick="logout()">Cerrar sesión</button>
 </div>
 
-<!-- MI HUERTO -->
+<!-- HUERTO -->
 <div id="huerto" class="section">
     <h2>Mi Huerto</h2>
     <input id="planta" placeholder="Agregar cultivo">
@@ -154,19 +100,19 @@ button {
 <!-- CULTIVOS -->
 <div id="cultivos" class="section">
     <h2>Cultivos</h2>
-    <p>Información sobre cultivos inteligentes 🌱</p>
+    <p>Información sobre cultivos 🌱</p>
 </div>
 
 <!-- RECURSOS -->
 <div id="recursos" class="section">
     <h2>Recursos Sustentables</h2>
-    <p>Uso eficiente del agua, energía y suelo ♻️</p>
+    <p>Uso eficiente ♻️</p>
 </div>
 
 <!-- PROVEEDORES -->
 <div id="proveedores" class="section">
-    <h2>Carta de Proveedores</h2>
-    <p>Lista de proveedores agrícolas confiables 📄</p>
+    <h2>Proveedores</h2>
+    <p>Lista de proveedores 📄</p>
 </div>
 
 <script>
@@ -175,43 +121,29 @@ function mostrar(id) {
     document.getElementById(id).classList.add("active");
 }
 
-/* LOGIN */
-function crearCuenta() {
-    let user = document.getElementById("newUser").value;
-    let pass = document.getElementById("newPass").value;
+/* SESIÓN */
+window.onload = function() {
+    let user = localStorage.getItem("sesion");
 
-    localStorage.setItem("user", user);
-    localStorage.setItem("pass", pass);
-
-    alert("Cuenta creada");
-}
-
-function login() {
-    let user = document.getElementById("loginUser").value;
-    let pass = document.getElementById("loginPass").value;
-
-    let savedUser = localStorage.getItem("user");
-    let savedPass = localStorage.getItem("pass");
-
-    if(user === savedUser && pass === savedPass) {
-        localStorage.setItem("sesion", user);
-        mostrar("perfil");
+    if(user) {
+        document.getElementById("nav-derecha").innerHTML = `
+            <a onclick="mostrar('perfil')">Mi Perfil</a>
+            <a onclick="mostrar('huerto')">Mi Huerto</a>
+        `;
         document.getElementById("infoUsuario").innerText = "Usuario: " + user;
-    } else {
-        alert("Datos incorrectos");
     }
 }
 
 function logout() {
     localStorage.removeItem("sesion");
-    mostrar("inicio");
+    location.reload();
 }
 
 /* HUERTO */
 function agregarPlanta() {
     let planta = document.getElementById("planta").value;
-
     let lista = document.getElementById("listaPlantas");
+
     let item = document.createElement("li");
     item.textContent = planta;
 
