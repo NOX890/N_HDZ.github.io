@@ -3,67 +3,46 @@
 <head>
 <meta charset="UTF-8">
 <title>Login</title>
-
-<style>
-body {
-    font-family: Arial;
-    background: #408A19;
-    color: white;
-    text-align: center;
-    padding-top: 100px;
-}
-
-input {
-    padding: 10px;
-    margin: 10px;
-    border-radius: 10px;
-    border: none;
-}
-
-button {
-    padding: 10px 20px;
-    background: #8DE35F;
-    border: none;
-    border-radius: 20px;
-}
-</style>
 </head>
 
 <body>
 
 <h2>Iniciar Sesión</h2>
-
-<input id="user" placeholder="Usuario"><br>
-<input id="pass" type="password" placeholder="Contraseña"><br>
-
+<input id="loginUser" placeholder="Usuario">
+<input id="loginPass" type="password" placeholder="Contraseña">
 <button onclick="login()">Entrar</button>
 
 <h3>Crear cuenta</h3>
+<input id="newUser" placeholder="Usuario">
+<input id="newPass" type="password" placeholder="Contraseña">
 
-<input id="newUser" placeholder="Nuevo usuario"><br>
-<input id="newPass" type="password" placeholder="Nueva contraseña"><br>
+<select id="newZona">
+    <option value="">Zona climática</option>
+    <option value="arida">Árida</option>
+    <option value="semiarida">Semiárida</option>
+    <option value="templada">Templada</option>
+    <option value="humeda">Húmeda</option>
+    <option value="tropical">Tropical</option>
+</select>
 
 <button onclick="crearCuenta()">Registrar</button>
 
 <script>
 function crearCuenta() {
-    localStorage.setItem("user", document.getElementById("newUser").value);
-    localStorage.setItem("pass", document.getElementById("newPass").value);
+    localStorage.setItem("user", newUser.value);
+    localStorage.setItem("pass", newPass.value);
+    localStorage.setItem("zonaPerfil", newZona.value);
     alert("Cuenta creada");
 }
 
 function login() {
-    let user = document.getElementById("user").value;
-    let pass = document.getElementById("pass").value;
+    if(loginUser.value === localStorage.getItem("user") &&
+       loginPass.value === localStorage.getItem("pass")) {
 
-    let savedUser = localStorage.getItem("user");
-    let savedPass = localStorage.getItem("pass");
-
-    if(user === savedUser && pass === savedPass) {
-        localStorage.setItem("sesion", user);
+        localStorage.setItem("sesion", loginUser.value);
         window.location.href = "index.html";
     } else {
-        alert("Datos incorrectos");
+        alert("Error");
     }
 }
 </script>
