@@ -18,14 +18,13 @@ nav {
     padding: 15px;
     display: flex;
     justify-content: space-between;
-    align-items: center;
 }
 
 nav a {
     color: white;
     margin: 10px;
-    text-decoration: none;
     cursor: pointer;
+    text-decoration: none;
 }
 
 /* SECCIONES */
@@ -42,12 +41,11 @@ nav a {
 .hero {
     display: flex;
     justify-content: center;
-    align-items: center;
     padding: 20px;
 }
 
 .hero img {
-    max-width: 100%;
+    max-width: 90%;
     border-radius: 20px;
 }
 
@@ -55,7 +53,6 @@ nav a {
 .contenedor-botones {
     display: flex;
     justify-content: space-around;
-    align-items: center;
     padding: 30px;
 }
 
@@ -63,7 +60,6 @@ nav a {
     width: 28%;
     position: relative;
     cursor: pointer;
-    transition: 0.3s;
 }
 
 .card img {
@@ -73,20 +69,14 @@ nav a {
 
 .texto-card {
     position: absolute;
-    bottom: 15px;
-    left: 15px;
-    font-size: 18px;
-    font-weight: bold;
+    bottom: 10px;
+    left: 10px;
     background: rgba(0,0,0,0.5);
-    padding: 8px;
+    padding: 5px;
     border-radius: 10px;
 }
 
-.card:hover {
-    transform: scale(1.05);
-}
-
-/* BOTÓN SESIÓN */
+/* SESIÓN */
 .login-btn {
     background: #8DE35F;
     padding: 10px 20px;
@@ -96,51 +86,44 @@ nav a {
 /* PERFIL */
 .perfil-container {
     position: relative;
-    display: inline-block;
 }
 
 .icono {
     width: 40px;
-    height: 40px;
     border-radius: 50%;
     cursor: pointer;
 }
 
-/* DROPDOWN */
 .dropdown {
     display: none;
     position: absolute;
     right: 0;
     background: #2e6b12;
-    border-radius: 10px;
-    overflow: hidden;
 }
 
 .dropdown a {
     display: block;
-    padding: 10px 20px;
-    color: white;
+    padding: 10px;
 }
 
-.dropdown a:hover {
-    background: #408A19;
+/* PERFIL FORM */
+.perfil-box {
+    text-align: center;
 }
 
-/* FORM */
-input {
+#fotoPerfil {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+}
+
+/* INPUTS */
+input, select {
     display: block;
     margin: 10px 0;
     padding: 10px;
     border-radius: 10px;
     border: none;
-}
-
-button {
-    padding: 10px 20px;
-    background: #8DE35F;
-    border: none;
-    border-radius: 20px;
-    cursor: pointer;
 }
 </style>
 </head>
@@ -156,13 +139,13 @@ button {
     </div>
 
     <div>
-        <a href="login.html" class="login-btn" id="btnSesion">Sesión</a>
+        <a href="login.html" id="btnSesion" class="login-btn">Sesión</a>
 
-        <div class="perfil-container" id="perfilMenu" style="display:none;">
+        <div id="perfilMenu" style="display:none;" class="perfil-container">
             <img src="perfil.png" class="icono" onclick="toggleMenu()">
 
-            <div class="dropdown" id="dropdownMenu">
-                <a href="perfil.html">Mi perfil</a>
+            <div id="dropdownMenu" class="dropdown">
+                <a onclick="mostrar('perfil')">Mi perfil</a>
                 <a onclick="mostrar('huerto')">Mi huerto</a>
                 <a onclick="logout()">Cerrar sesión</a>
             </div>
@@ -172,41 +155,57 @@ button {
 
 <!-- INICIO -->
 <div id="inicio" class="section active">
-
-    <!-- IMAGEN -->
     <div class="hero">
         <img src="portada principal.jpeg">
     </div>
 
-    <!-- BOTONES -->
     <div class="contenedor-botones">
-
         <div class="card" onclick="mostrar('cultivos')">
-            <img src="plantar.jpeg">
+            <img src="plantar.jpg">
+            <div class="texto-card">¿Qué puedo plantar?</div>
         </div>
 
         <div class="card" onclick="mostrar('recursos')">
-            <img src="sustentable.jpeg">
+            <img src="sustentable.jpg">
+            <div class="texto-card">Huerto sustentable</div>
         </div>
 
         <div class="card" onclick="mostrar('proveedores')">
-            <img src="proveedores.jpeg">
+            <img src="proveedores.jpg">
+            <div class="texto-card">Proveedores</div>
         </div>
-
     </div>
-
 </div>
 
 <!-- PERFIL -->
 <div id="perfil" class="section">
+
     <h2>Mi Perfil</h2>
-    <p id="infoUsuario"></p>
+
+    <div class="perfil-box">
+        <img src="perfil.png" id="fotoPerfil">
+        <input type="file" onchange="cambiarFoto(event)">
+    </div>
+
+    <label>Nombre:</label>
+    <input id="nombreUsuario" oninput="guardarPerfil()">
+
+    <label>Zona climática:</label>
+    <select id="zonaUsuario" onchange="guardarPerfil()">
+        <option value="">Selecciona</option>
+        <option value="arida">Árida</option>
+        <option value="semiarida">Semiárida</option>
+        <option value="templada">Templada</option>
+        <option value="humeda">Húmeda</option>
+        <option value="tropical">Tropical</option>
+    </select>
+
 </div>
 
 <!-- HUERTO -->
 <div id="huerto" class="section">
     <h2>Mi Huerto</h2>
-    <input id="planta" placeholder="Agregar cultivo">
+    <input id="planta">
     <button onclick="agregarPlanta()">Agregar</button>
     <ul id="listaPlantas"></ul>
 </div>
@@ -214,19 +213,16 @@ button {
 <!-- CULTIVOS -->
 <div id="cultivos" class="section">
     <h2>Cultivos</h2>
-    <p>Información sobre cultivos 🌱</p>
 </div>
 
 <!-- RECURSOS -->
 <div id="recursos" class="section">
-    <h2>Recursos Sustentables</h2>
-    <p>Uso eficiente ♻️</p>
+    <h2>Recursos</h2>
 </div>
 
 <!-- PROVEEDORES -->
 <div id="proveedores" class="section">
     <h2>Proveedores</h2>
-    <p>Lista de proveedores 📄</p>
 </div>
 
 <script>
@@ -235,10 +231,24 @@ function mostrar(id) {
     document.getElementById(id).classList.add("active");
 }
 
-/* DROPDOWN */
 function toggleMenu() {
-    let menu = document.getElementById("dropdownMenu");
-    menu.style.display = menu.style.display === "block" ? "none" : "block";
+    let m = document.getElementById("dropdownMenu");
+    m.style.display = m.style.display === "block" ? "none" : "block";
+}
+
+/* PERFIL */
+function guardarPerfil() {
+    localStorage.setItem("nombrePerfil", document.getElementById("nombreUsuario").value);
+    localStorage.setItem("zonaPerfil", document.getElementById("zonaUsuario").value);
+}
+
+function cambiarFoto(e) {
+    let reader = new FileReader();
+    reader.onload = function(ev) {
+        document.getElementById("fotoPerfil").src = ev.target.result;
+        localStorage.setItem("fotoPerfil", ev.target.result);
+    }
+    reader.readAsDataURL(e.target.files[0]);
 }
 
 /* SESIÓN */
@@ -248,8 +258,16 @@ window.onload = function() {
     if(user) {
         document.getElementById("btnSesion").style.display = "none";
         document.getElementById("perfilMenu").style.display = "inline-block";
-        document.getElementById("infoUsuario").innerText = "Usuario: " + user;
     }
+
+    let nombre = localStorage.getItem("nombrePerfil");
+    if(nombre) document.getElementById("nombreUsuario").value = nombre;
+
+    let zona = localStorage.getItem("zonaPerfil");
+    if(zona) document.getElementById("zonaUsuario").value = zona;
+
+    let foto = localStorage.getItem("fotoPerfil");
+    if(foto) document.getElementById("fotoPerfil").src = foto;
 }
 
 function logout() {
@@ -259,13 +277,10 @@ function logout() {
 
 /* HUERTO */
 function agregarPlanta() {
-    let planta = document.getElementById("planta").value;
-
-    let lista = document.getElementById("listaPlantas");
-    let item = document.createElement("li");
-
-    item.textContent = planta;
-    lista.appendChild(item);
+    let p = document.getElementById("planta").value;
+    let li = document.createElement("li");
+    li.textContent = p;
+    document.getElementById("listaPlantas").appendChild(li);
 }
 </script>
 
