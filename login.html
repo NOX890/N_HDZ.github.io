@@ -8,20 +8,31 @@
 body {
     margin: 0;
     font-family: Arial;
+    height: 100vh;
+    display: flex;
+}
+
+/* IZQUIERDA (LOGIN) */
+.login-section {
+    width: 40%;
     background: #408A19;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
 }
 
-/* CONTENEDOR */
 .login-box {
     background: #2e6b12;
     padding: 30px;
     border-radius: 20px;
     width: 300px;
     color: white;
+}
+
+/* DERECHA (IMAGEN) */
+.image-section {
+    width: 60%;
+    background: url("perfil-fondo.jpeg") center/cover no-repeat;
 }
 
 /* INPUTS */
@@ -66,51 +77,55 @@ h2, h3 {
 
 <body>
 
-<div class="login-box">
+<!-- IZQUIERDA -->
+<div class="login-section">
 
-    <h2>Iniciar Sesión</h2>
+    <div class="login-box">
 
-    <input id="loginUser" placeholder="Usuario">
+        <h2>Iniciar Sesión</h2>
 
-    <div class="pass-container">
-        <input id="loginPass" type="password" placeholder="Contraseña">
-        <span class="ver-pass" onclick="togglePass('loginPass')">👁️</span>
+        <input id="loginUser" placeholder="Usuario">
+
+        <div class="pass-container">
+            <input id="loginPass" type="password" placeholder="Contraseña">
+            <span class="ver-pass" onclick="togglePass('loginPass')">👁️</span>
+        </div>
+
+        <button onclick="login()">Entrar</button>
+
+        <h3>Crear cuenta</h3>
+
+        <input id="newUser" placeholder="Usuario">
+
+        <div class="pass-container">
+            <input id="newPass" type="password" placeholder="Contraseña">
+            <span class="ver-pass" onclick="togglePass('newPass')">👁️</span>
+        </div>
+
+        <select id="newZona">
+            <option value="">Zona climática</option>
+            <option value="arida">Árida</option>
+            <option value="semiarida">Semiárida</option>
+            <option value="templada">Templada</option>
+            <option value="humeda">Húmeda</option>
+            <option value="tropical">Tropical</option>
+        </select>
+
+        <button onclick="crearCuenta()">Registrar</button>
+
     </div>
-
-    <button onclick="login()">Entrar</button>
-
-    <h3>Crear cuenta</h3>
-
-    <input id="newUser" placeholder="Usuario">
-
-    <div class="pass-container">
-        <input id="newPass" type="password" placeholder="Contraseña">
-        <span class="ver-pass" onclick="togglePass('newPass')">👁️</span>
-    </div>
-
-    <!-- ZONA -->
-    <select id="newZona">
-        <option value="">Zona climática</option>
-        <option value="arida">Árida</option>
-        <option value="semiarida">Semiárida</option>
-        <option value="templada">Templada</option>
-        <option value="humeda">Húmeda</option>
-        <option value="tropical">Tropical</option>
-    </select>
-
-    <button onclick="crearCuenta()">Registrar</button>
 
 </div>
 
-<script>
+<!-- DERECHA -->
+<div class="image-section"></div>
 
-/* MOSTRAR CONTRASEÑA */
+<script>
 function togglePass(id) {
     let input = document.getElementById(id);
     input.type = input.type === "password" ? "text" : "password";
 }
 
-/* REGISTRO */
 function crearCuenta() {
     let user = newUser.value;
     let pass = newPass.value;
@@ -128,7 +143,6 @@ function crearCuenta() {
     alert("Cuenta creada");
 }
 
-/* LOGIN */
 function login() {
     let user = loginUser.value;
     let pass = loginPass.value;
@@ -143,7 +157,6 @@ function login() {
         alert("Datos incorrectos");
     }
 }
-
 </script>
 
 </body>
