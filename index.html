@@ -12,7 +12,7 @@ body {
     color: white;
 }
 
-/* NAV GENERAL AJUSTADO */
+/* NAV GENERAL */
 nav{
     background:#2e6b12;
     padding:10px 15px;
@@ -21,14 +21,13 @@ nav{
     align-items:center;
 }
 
-/* LADO IZQUIERDO */
+/* IZQUIERDA */
 .nav-left{
     display:flex;
     align-items:center;
     gap:20px;
 }
 
-/* LOGO */
 .logo{
     height:50px;
     cursor:pointer;
@@ -39,7 +38,6 @@ nav{
     align-items:center;
 }
 
-/* LINKS DEL MENU */
 .menu-links{
     display:flex;
     gap:15px;
@@ -56,11 +54,18 @@ nav{
     text-decoration:underline;
 }
 
-/* LADO DERECHO */
+/* DERECHA */
 .nav-right{
     display:flex;
     align-items:center;
     gap:15px;
+}
+
+/* LOGIN */
+.login-btn {
+    background: #8DE35F;
+    padding: 10px 20px;
+    border-radius: 20px;
 }
 
 /* SECCIONES */
@@ -73,7 +78,7 @@ nav{
     display: block;
 }
 
-/* PORTADA */
+/* HERO */
 .hero {
     display: flex;
     justify-content: center;
@@ -102,14 +107,10 @@ nav{
     border-radius: 20px;
 }
 
-/* LOGIN */
-.login-btn {
-    background: #8DE35F;
-    padding: 10px 20px;
-    border-radius: 20px;
-}
+/* =========================
+   DROPDOWN PERFIL
+========================= */
 
-/* PERFIL MENU */
 .perfil-container {
     position: relative;
 }
@@ -125,12 +126,21 @@ nav{
     position: absolute;
     right: 0;
     background: #2e6b12;
+    min-width: 160px;
+    border-radius: 8px;
+    overflow: hidden;
+    z-index: 999;
 }
 
 .dropdown a {
     display: block;
     padding: 10px;
     color: white;
+    cursor: pointer;
+}
+
+.dropdown a:hover {
+    background: #24530f;
 }
 
 /* =========================
@@ -192,47 +202,8 @@ nav{
     background: #0d6b2f;
 }
 
-/* EDITAR PERFIL */
-.perfil-edit{
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    height:80vh;
-    gap:15px;
-    text-align:center;
-}
-
-.perfil-edit input,
-.perfil-edit select{
-    width:250px;
-    padding:10px;
-    border-radius:10px;
-    border:none;
-}
-
-.foto-container{
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    gap:10px;
-}
-
-.foto-container img{
-    width:120px;
-    height:120px;
-    border-radius:50%;
-    object-fit:cover;
-    border:3px solid white;
-}
-
-.estado{
-    font-size:12px;
-    opacity:0.8;
-}
-
 /* =========================
-   🌱 MI HUERTO 40 / 60
+   MI HUERTO 40 / 60
 ========================= */
 
 .huerto-container{
@@ -240,7 +211,6 @@ nav{
     height:80vh;
 }
 
-/* IZQUIERDA */
 .huerto-izq{
     width:40%;
     background:#2e6b12;
@@ -271,7 +241,6 @@ nav{
     transform:scale(1.05);
 }
 
-/* DERECHA */
 .huerto-der{
     width:60%;
     display:flex;
@@ -279,7 +248,6 @@ nav{
     align-items:center;
 }
 
-/* CUADRO BLANCO RESPONSIVO */
 .cuadro-huerto{
     width:90%;
     max-width:958px;
@@ -394,47 +362,27 @@ nav{
 
 </div>
 
-<!-- OTROS -->
 <div id="cultivos" class="section"><h2>Cultivos</h2></div>
 <div id="recursos" class="section"><h2>Recursos</h2></div>
 <div id="proveedores" class="section"><h2>Proveedores</h2></div>
-
-<!-- EDITAR PERFIL -->
-<div id="editarPerfil" class="section">
-    <div class="perfil-edit">
-
-        <h2>Editar perfil</h2>
-
-        <div class="foto-container">
-            <img id="fotoPreview" src="perfil.png">
-            <input type="file" id="fotoInput">
-        </div>
-
-        <input type="text" id="nombreInput" placeholder="Nombre">
-
-        <select id="zonaInput">
-            <option value="">Zona climática 🌎</option>
-            <option>Desértica 🌵</option>
-            <option>Tropical 🌴</option>
-            <option>Templada 🌿</option>
-            <option>Fría ❄️</option>
-        </select>
-
-        <p class="estado">💾 Guardado automático</p>
-    </div>
-</div>
 
 <script>
 window.mostrar = function (id) {
     document.querySelectorAll(".section").forEach(sec => sec.classList.remove("active"));
     document.getElementById(id).classList.add("active");
+
+    document.getElementById("dropdownMenu").style.display = "none";
 };
 
 window.toggleMenu = function (event) {
     event.stopPropagation();
     let m = document.getElementById("dropdownMenu");
-    m.style.display = m.style.display === "block" ? "none" : "block";
+    m.style.display = (m.style.display === "block") ? "none" : "block";
 };
+
+document.addEventListener("click", () => {
+    document.getElementById("dropdownMenu").style.display = "none";
+});
 
 window.logout = function () {
     localStorage.removeItem("sesion");
