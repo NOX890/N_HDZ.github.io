@@ -12,7 +12,7 @@ body {
     color: white;
 }
 
-/* NAV GENERAL */
+/* NAV */
 nav{
     background:#2e6b12;
     padding:10px 15px;
@@ -21,7 +21,6 @@ nav{
     align-items:center;
 }
 
-/* IZQUIERDA */
 .nav-left{
     display:flex;
     align-items:center;
@@ -54,14 +53,12 @@ nav{
     text-decoration:underline;
 }
 
-/* DERECHA */
 .nav-right{
     display:flex;
     align-items:center;
     gap:15px;
 }
 
-/* LOGIN */
 .login-btn {
     background: #8DE35F;
     padding: 10px 20px;
@@ -90,7 +87,7 @@ nav{
     border-radius: 20px;
 }
 
-/* BOTONES INICIO */
+/* BOTONES */
 .contenedor-botones {
     display: flex;
     justify-content: space-around;
@@ -107,10 +104,7 @@ nav{
     border-radius: 20px;
 }
 
-/* =========================
-   DROPDOWN PERFIL
-========================= */
-
+/* DROPDOWN */
 .perfil-container {
     position: relative;
 }
@@ -136,17 +130,9 @@ nav{
     display: block;
     padding: 10px;
     color: white;
-    cursor: pointer;
 }
 
-.dropdown a:hover {
-    background: #24530f;
-}
-
-/* =========================
-   PERFIL SPLIT
-========================= */
-
+/* PERFIL */
 .perfil-hero {
     display: flex;
     width: 100%;
@@ -181,9 +167,6 @@ nav{
     object-fit: contain;
     cursor: pointer;
     transition: 0.3s;
-    border-radius: 10px;
-    background: rgba(255,255,255,0.05);
-    padding: 5px;
 }
 
 .perfil-botones-texto img:hover {
@@ -202,8 +185,39 @@ nav{
     background: #0d6b2f;
 }
 
+/* EDITAR PERFIL */
+.perfil-edit{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    height:80vh;
+    gap:15px;
+}
+
+.perfil-edit input,
+.perfil-edit select{
+    width:250px;
+    padding:10px;
+    border-radius:10px;
+    border:none;
+}
+
+.foto-container{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:10px;
+}
+
+.foto-container img{
+    width:120px;
+    height:120px;
+    border-radius:50%;
+}
+
 /* =========================
-   MI HUERTO 40 / 60
+   🌱 MI HUERTO 40 / 60
 ========================= */
 
 .huerto-container{
@@ -211,6 +225,7 @@ nav{
     height:80vh;
 }
 
+/* IZQUIERDA 40% */
 .huerto-izq{
     width:40%;
     background:#2e6b12;
@@ -221,10 +236,12 @@ nav{
     gap:20px;
 }
 
+/* LOGO */
 .huerto-logo{
     height:70px;
 }
 
+/* BOTONES */
 .huerto-botones{
     display:flex;
     flex-direction:column;
@@ -241,6 +258,7 @@ nav{
     transform:scale(1.05);
 }
 
+/* DERECHA 60% */
 .huerto-der{
     width:60%;
     display:flex;
@@ -248,9 +266,9 @@ nav{
     align-items:center;
 }
 
+/* CUADRO BLANCO */
 .cuadro-huerto{
-    width:90%;
-    max-width:958px;
+    width:958px;
     height:637px;
     background:white;
     border-radius:10px;
@@ -337,7 +355,7 @@ nav{
     </div>
 </div>
 
-<!-- 🌱 MI HUERTO -->
+<!-- 🌱 MI HUERTO (YA INTEGRADO) -->
 <div id="huerto" class="section">
 
     <div class="huerto-container">
@@ -370,14 +388,13 @@ nav{
 window.mostrar = function (id) {
     document.querySelectorAll(".section").forEach(sec => sec.classList.remove("active"));
     document.getElementById(id).classList.add("active");
-
     document.getElementById("dropdownMenu").style.display = "none";
 };
 
 window.toggleMenu = function (event) {
     event.stopPropagation();
     let m = document.getElementById("dropdownMenu");
-    m.style.display = (m.style.display === "block") ? "none" : "block";
+    m.style.display = m.style.display === "block" ? "none" : "block";
 };
 
 document.addEventListener("click", () => {
