@@ -279,7 +279,7 @@ nav{
     align-items:center;
 }
 
-/* CUADRO BLANCO RESPONSIVE */
+/* CUADRO BLANCO RESPONSIVO */
 .cuadro-huerto{
     width:90%;
     max-width:958px;
@@ -314,6 +314,7 @@ nav{
 
         <div id="perfilMenu" style="display:none;" class="perfil-container">
             <img src="perfil.png" class="icono" onclick="toggleMenu(event)">
+
             <div id="dropdownMenu" class="dropdown">
                 <a onclick="mostrar('editarPerfil')">Editar perfil</a>
                 <a onclick="mostrar('perfil')">Mi perfil</a>
@@ -345,12 +346,36 @@ nav{
     </div>
 </div>
 
-<!-- MI HUERTO -->
+<!-- PERFIL -->
+<div id="perfil" class="section">
+
+    <div class="perfil-hero">
+
+        <div class="perfil-texto">
+            <h1>Bienvenida</h1>
+            <h2 id="nombreBienvenida"></h2>
+
+            <div class="perfil-botones-texto">
+                <img src="icono1.jpeg" onclick="mostrar('huerto')">
+                <img src="icono2.jpeg" onclick="mostrar('cultivos')">
+                <img src="icono3.jpeg" onclick="mostrar('proveedores')">
+            </div>
+        </div>
+
+        <div class="perfil-imagen">
+            <img src="perfil-fondo.jpeg">
+        </div>
+
+    </div>
+</div>
+
+<!-- 🌱 MI HUERTO -->
 <div id="huerto" class="section">
 
     <div class="huerto-container">
 
         <div class="huerto-izq">
+
             <img src="logo.png" class="huerto-logo">
 
             <div class="huerto-botones">
@@ -358,6 +383,7 @@ nav{
                 <img src="btn2.png">
                 <img src="btn3.png">
             </div>
+
         </div>
 
         <div class="huerto-der">
@@ -372,6 +398,31 @@ nav{
 <div id="cultivos" class="section"><h2>Cultivos</h2></div>
 <div id="recursos" class="section"><h2>Recursos</h2></div>
 <div id="proveedores" class="section"><h2>Proveedores</h2></div>
+
+<!-- EDITAR PERFIL -->
+<div id="editarPerfil" class="section">
+    <div class="perfil-edit">
+
+        <h2>Editar perfil</h2>
+
+        <div class="foto-container">
+            <img id="fotoPreview" src="perfil.png">
+            <input type="file" id="fotoInput">
+        </div>
+
+        <input type="text" id="nombreInput" placeholder="Nombre">
+
+        <select id="zonaInput">
+            <option value="">Zona climática 🌎</option>
+            <option>Desértica 🌵</option>
+            <option>Tropical 🌴</option>
+            <option>Templada 🌿</option>
+            <option>Fría ❄️</option>
+        </select>
+
+        <p class="estado">💾 Guardado automático</p>
+    </div>
+</div>
 
 <script>
 window.mostrar = function (id) {
