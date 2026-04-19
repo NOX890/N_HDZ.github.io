@@ -16,6 +16,7 @@
 <input id="newUser" placeholder="Usuario">
 <input id="newPass" type="password" placeholder="Contraseña">
 
+<!-- NUEVO -->
 <select id="newZona">
     <option value="">Zona climática</option>
     <option value="arida">Árida</option>
@@ -31,7 +32,7 @@
 function crearCuenta() {
     localStorage.setItem("user", newUser.value);
     localStorage.setItem("pass", newPass.value);
-    localStorage.setItem("zonaPerfil", newZona.value);
+    localStorage.setItem("zonaPerfil", newZona.value); // SOLO agregado
     alert("Cuenta creada");
 }
 
