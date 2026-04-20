@@ -32,11 +32,6 @@ nav{
     cursor:pointer;
 }
 
-.logo-link{
-    display:flex;
-    align-items:center;
-}
-
 .menu-links{
     display:flex;
     gap:15px;
@@ -61,6 +56,8 @@ nav{
     padding: 10px 20px;
     border-radius: 20px;
     cursor:pointer;
+    text-decoration:none;
+    color:black;
 }
 
 /* SECCIONES */
@@ -84,24 +81,7 @@ nav{
     border-radius: 20px;
 }
 
-/* BOTONES */
-.contenedor-botones {
-    display: flex;
-    justify-content: space-around;
-    padding: 30px;
-}
-
-.card {
-    width: 28%;
-    cursor: pointer;
-}
-
-.card img {
-    width: 100%;
-    border-radius: 20px;
-}
-
-/* PERFIL DROPDOWN */
+/* PERFIL */
 .perfil-container {
     position: relative;
 }
@@ -116,6 +96,7 @@ nav{
     display: none;
     position: absolute;
     right: 0;
+    top: 45px;
     background: #2e6b12;
     min-width: 160px;
     border-radius: 8px;
@@ -128,6 +109,11 @@ nav{
     padding:10px;
     color:white;
     cursor:pointer;
+    text-decoration:none;
+}
+
+.dropdown.show {
+    display:block;
 }
 
 /* PERFIL */
@@ -158,11 +144,23 @@ nav{
     align-items:center;
 }
 
+/* 🔥 ARREGLO ICONOS */
 .perfil-botones-texto img {
-    width:180px;
-    height:60px;
-    object-fit:contain;
-    cursor:pointer;
+    width: 170px;
+    height: auto;
+    object-fit: contain;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.perfil-botones-texto img:hover {
+    transform: scale(1.05);
+}
+
+.perfil-imagen img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
 }
 
 /* HUERTO */
@@ -171,7 +169,6 @@ nav{
     height:80vh;
 }
 
-/* IZQUIERDA */
 .huerto-izq{
     width:40%;
     background:#2e6b12;
@@ -195,14 +192,8 @@ nav{
 .huerto-botones img{
     width:180px;
     cursor:pointer;
-    transition:0.3s;
 }
 
-.huerto-botones img:hover{
-    transform:scale(1.05);
-}
-
-/* DERECHA */
 .huerto-der{
     width:60%;
     display:flex;
@@ -215,39 +206,29 @@ nav{
     height:637px;
     background:white;
     border-radius:10px;
-    overflow:hidden; /* 🔥 importante para que no se salga la imagen */
+    overflow:hidden;
 }
 
-/* IMAGEN HUERTO */
 .huerto-img{
     width:100%;
     height:100%;
     object-fit:contain;
-    display:block;
-}
-/* EDITAR PERFIL */
-.perfil-edit{
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    height:80vh;
-    gap:15px;
 }
 
+/* CULTIVOS */
 .cultivo-imagen {
     width: 100%;
-    height: 70vh;          /* ajusta el alto de la sección */
+    height: 70vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #0d6b2f;   /* fondo por si sobra espacio */
+    background: #0d6b2f;
 }
 
 .cultivo-imagen img {
     width: 100%;
     height: 100%;
-    object-fit: contain;   /* 👈 sin zoom, sin recorte */
+    object-fit: contain;
 }
 </style>
 </head>
@@ -255,11 +236,8 @@ nav{
 <body>
 
 <nav>
-
 <div class="nav-left">
-    <a onclick="mostrar('inicio')" class="logo-link">
-        <img src="logo.png" class="logo">
-    </a>
+    <img src="logo.png" class="logo" onclick="mostrar('inicio')">
 
     <div class="menu-links">
         <a onclick="mostrar('cultivos')">Cultivos</a>
@@ -272,7 +250,7 @@ nav{
 
     <a href="login.html" id="btnSesion" class="login-btn">Sesión</a>
 
-    <div id="perfilMenu" style="display:none;" class="perfil-container">
+    <div id="perfilMenu" class="perfil-container" style="display:none;">
         <img src="perfil.png" class="icono" onclick="toggleMenu(event)">
 
         <div id="dropdownMenu" class="dropdown">
@@ -284,21 +262,17 @@ nav{
     </div>
 
 </div>
-
 </nav>
 
 <!-- INICIO -->
 <div id="inicio" class="section active">
-
     <div class="hero">
         <img src="portada principal.jpeg">
     </div>
-
 </div>
 
 <!-- PERFIL -->
 <div id="perfil" class="section">
-
 <div class="perfil-hero">
 
 <div class="perfil-texto">
@@ -306,9 +280,9 @@ nav{
 <h2 id="nombreBienvenida"></h2>
 
 <div class="perfil-botones-texto">
-<img src="icono1.jpeg" onclick="mostrar('huerto')">
-<img src="icono2.jpeg" onclick="mostrar('sustentables')">
-<img src="icono3.jpeg" onclick="mostrar('proveedores')">
+<img src="icono1.jpeg">
+<img src="icono2.jpeg">
+<img src="icono3.jpeg">
 </div>
 
 </div>
@@ -318,44 +292,39 @@ nav{
 </div>
 
 </div>
-
 </div>
 
+<!-- HUERTO -->
 <div id="huerto" class="section">
+<div class="huerto-container">
 
-    <div class="huerto-container">
+<div class="huerto-izq">
+<img src="logo.png" class="huerto-logo">
 
-        <!-- IZQUIERDA -->
-        <div class="huerto-izq">
-
-            <img src="logo.png" class="huerto-logo">
-
-            <div class="huerto-botones">
-                <img src="icono4.jpeg" title="actividades">
-                <img src="icono2.jpeg" title="sustentable">
-                <img src="icono3.jpeg" title="proveedores">
-            </div>
-
-        </div>
-
-        <!-- DERECHA -->
-        <div class="huerto-der">
-
-            <div class="cuadro-huerto">
-                <img src="huerto.jpeg" class="huerto-img">
-            </div>
-
-        </div>
-
-    </div>
+<div class="huerto-botones">
+<img src="icono4.jpeg">
+<img src="icono2.jpeg">
+<img src="icono3.jpeg">
+</div>
 
 </div>
+
+<div class="huerto-der">
+<div class="cuadro-huerto">
+<img src="huerto.jpeg" class="huerto-img">
+</div>
+</div>
+
+</div>
+</div>
+
+<!-- CULTIVOS -->
 <div id="cultivos" class="section">
-    <div class="cultivo-imagen">
-        <img src="cultivos.jpeg">
-    </div>
-
+<div class="cultivo-imagen">
+<img src="cultivos.jpeg">
 </div>
+</div>
+
 <div id="recursos" class="section"><h2>Recursos</h2></div>
 <div id="proveedores" class="section"><h2>Proveedores</h2></div>
 
@@ -363,23 +332,22 @@ nav{
 window.mostrar = function(id){
     document.querySelectorAll(".section").forEach(s=>s.classList.remove("active"));
     document.getElementById(id).classList.add("active");
-    document.getElementById("dropdownMenu").style.display="none";
+    document.getElementById("dropdownMenu").classList.remove("show");
 };
 
 window.toggleMenu = function(e){
     e.stopPropagation();
-    let m=document.getElementById("dropdownMenu");
-    m.style.display = (m.style.display==="block")?"none":"block";
+    document.getElementById("dropdownMenu").classList.toggle("show");
 };
 
 document.addEventListener("click",()=>{
-    document.getElementById("dropdownMenu").style.display="none";
+    document.getElementById("dropdownMenu").classList.remove("show");
 });
 
-/* 🔥 SESIÓN */
+/* SESIÓN */
 let user = localStorage.getItem("sesion");
 
-if(user && user !== "null"){
+if(user){
     document.getElementById("btnSesion").style.display="none";
     document.getElementById("perfilMenu").style.display="inline-block";
     document.getElementById("nombreBienvenida").innerText=user;
