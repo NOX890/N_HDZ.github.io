@@ -1,363 +1,90 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8">
-<title>Siembra Seguro</title>
-
-<style>
-body {
-    margin: 0;
-    font-family: Arial;
-    background: #408A19;
-    color: white;
-}
-
-/* NAV */
-nav{
-    background:#2e6b12;
-    padding:10px 15px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-}
-
-.nav-left{
-    display:flex;
-    align-items:center;
-    gap:20px;
-}
-
-.logo{
-    height:50px;
-    cursor:pointer;
-}
-
-.menu-links{
-    display:flex;
-    gap:15px;
-}
-
-.menu-links a{
-    color:white;
-    text-decoration:none;
-    font-weight:bold;
-    cursor:pointer;
-}
-
-/* NAV RIGHT */
-.nav-right{
-    display:flex;
-    align-items:center;
-    gap:15px;
-}
-
-.login-btn {
-    background: #8DE35F;
-    padding: 10px 20px;
-    border-radius: 20px;
-    cursor:pointer;
-    text-decoration:none;
-    color:black;
-}
-
-/* SECCIONES */
-.section {
-    display: none;
-    padding: 40px;
-}
-
-.active {
-    display: block;
-}
-
-/* HERO */
-.hero {
-    display: flex;
-    justify-content: center;
-}
-
-.hero img {
-    max-width: 90%;
-    border-radius: 20px;
-}
-
-/* PERFIL */
-.perfil-container {
-    position: relative;
-}
-
-.icono {
-    width: 40px;
-    border-radius: 50%;
-    cursor: pointer;
-}
-
-.dropdown {
-    display: none;
-    position: absolute;
-    right: 0;
-    top: 45px;
-    background: #2e6b12;
-    min-width: 160px;
-    border-radius: 8px;
-    overflow: hidden;
-    z-index: 999;
-}
-
-.dropdown a {
-    display:block;
-    padding:10px;
-    color:white;
-    cursor:pointer;
-    text-decoration:none;
-}
-
-.dropdown.show {
-    display:block;
-}
-
-/* PERFIL */
-.perfil-hero {
-    display:flex;
-    height:80vh;
-}
-
-.perfil-texto {
-    width:30%;
-    background: rgba(13,107,47,0.85);
-    padding:40px;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-}
-
-.perfil-texto h1 {
-    color:yellow;
-    font-size:50px;
-}
-
-.perfil-botones-texto {
-    margin-top:20px;
-    display:flex;
-    flex-direction:column;
-    gap:12px;
-    align-items:center;
-}
-
-/* 🔥 ARREGLO ICONOS */
-.perfil-botones-texto img {
-    width: 170px;
-    height: auto;
-    object-fit: contain;
-    cursor: pointer;
-    transition: 0.2s;
-}
-
-.perfil-botones-texto img:hover {
-    transform: scale(1.05);
-}
-
-.perfil-imagen img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-}
-
-/* HUERTO */
-.huerto-container{
-    display:flex;
-    height:80vh;
-}
-
-.huerto-izq{
-    width:40%;
-    background:#2e6b12;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    padding-top:20px;
-    gap:20px;
-}
-
-.huerto-logo{
-    height:100px;
-}
-
-.huerto-botones{
-    display:flex;
-    flex-direction:column;
-    gap:15px;
-}
-
-.huerto-botones img{
-    width:180px;
-    cursor:pointer;
-}
-
-.huerto-der{
-    width:60%;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-}
-
-.cuadro-huerto{
-    width:958px;
-    height:637px;
-    background:white;
-    border-radius:10px;
-    overflow:hidden;
-}
-
-.huerto-img{
-    width:100%;
-    height:100%;
-    object-fit:contain;
-}
-
-/* CULTIVOS */
-.cultivo-imagen {
-    width: 100%;
-    height: 70vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: #0d6b2f;
-}
-
-.cultivo-imagen img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-}
-</style>
-</head>
-
-<body>
-
-<nav>
-<div class="nav-left">
-    <img src="logo.png" class="logo" onclick="mostrar('inicio')">
-
-    <div class="menu-links">
-        <a onclick="mostrar('cultivos')">Cultivos</a>
-        <a onclick="mostrar('recursos')">Recursos</a>
-        <a onclick="mostrar('proveedores')">Proveedores</a>
-    </div>
-</div>
-
-<div class="nav-right">
-
-    <a href="login.html" id="btnSesion" class="login-btn">Sesión</a>
-
-    <div id="perfilMenu" class="perfil-container" style="display:none;">
-        <img src="perfil.png" class="icono" onclick="toggleMenu(event)">
-
-        <div id="dropdownMenu" class="dropdown">
-            <a onclick="mostrar('editarPerfil')">Editar perfil</a>
-            <a onclick="mostrar('perfil')">Mi perfil</a>
-            <a onclick="mostrar('huerto')">Mi huerto</a>
-            <a onclick="logout()">Cerrar sesión</a>
-        </div>
-    </div>
-
-</div>
-</nav>
-
-<!-- INICIO -->
-<div id="inicio" class="section active">
-    <div class="hero">
-        <img src="portada principal.jpeg">
-    </div>
-</div>
-
-<!-- PERFIL -->
-<div id="perfil" class="section">
-<div class="perfil-hero">
-
-<div class="perfil-texto">
-<h1>Bienvenida</h1>
-<h2 id="nombreBienvenida"></h2>
-
-<div class="perfil-botones-texto">
-<img src="icono1.jpeg">
-<img src="icono2.jpeg">
-<img src="icono3.jpeg">
-</div>
-
-</div>
-
-<div class="perfil-imagen">
-<img src="perfil-fondo.jpeg">
-</div>
-
-</div>
-</div>
-
-<!-- HUERTO -->
-<div id="huerto" class="section">
-<div class="huerto-container">
-
-<div class="huerto-izq">
-<img src="logo.png" class="huerto-logo">
-
-<div class="huerto-botones">
-<img src="icono4.jpeg">
-<img src="icono2.jpeg">
-<img src="icono3.jpeg">
-</div>
-
-</div>
-
-<div class="huerto-der">
-<div class="cuadro-huerto">
-<img src="huerto.jpeg" class="huerto-img">
-</div>
-</div>
-
-</div>
-</div>
-
-<!-- CULTIVOS -->
-<div id="cultivos" class="section">
-<div class="cultivo-imagen">
-<img src="cultivos.jpeg">
-</div>
-</div>
-
-<div id="recursos" class="section"><h2>Recursos</h2></div>
-<div id="proveedores" class="section"><h2>Proveedores</h2></div>
-
 <script>
-window.mostrar = function(id){
-    document.querySelectorAll(".section").forEach(s=>s.classList.remove("active"));
-    document.getElementById(id).classList.add("active");
-    document.getElementById("dropdownMenu").classList.remove("show");
-};
+document.addEventListener("DOMContentLoaded", () => {
 
-window.toggleMenu = function(e){
-    e.stopPropagation();
-    document.getElementById("dropdownMenu").classList.toggle("show");
-};
+    // ===== SECCIONES =====
+    window.mostrar = function (id) {
+        document.querySelectorAll(".section").forEach(sec => sec.classList.remove("active"));
+        document.getElementById(id).classList.add("active");
+        document.getElementById("dropdownMenu").style.display = "none";
+    };
 
-document.addEventListener("click",()=>{
-    document.getElementById("dropdownMenu").classList.remove("show");
+    // ===== MENÚ =====
+    window.toggleMenu = function (event) {
+        event.stopPropagation();
+        let m = document.getElementById("dropdownMenu");
+        m.style.display = m.style.display === "block" ? "none" : "block";
+    };
+
+    document.addEventListener("click", () => {
+        document.getElementById("dropdownMenu").style.display = "none";
+    });
+
+    // ===== SESIÓN =====
+    let user = localStorage.getItem("sesion");
+
+    if (user) {
+        document.getElementById("btnSesion").style.display = "none";
+        document.getElementById("perfilMenu").style.display = "inline-block";
+        document.getElementById("nombreBienvenida").innerText = user;
+    }
+
+    // ======================================================
+    // 🔥 TU BLOQUE INTEGRADO (CARGA + GUARDADO PERFIL)
+    // ======================================================
+
+    const nombreInput = document.getElementById("nombreInput");
+    const zonaInput = document.getElementById("zonaInput");
+    const fotoInput = document.getElementById("fotoInput");
+    const fotoPreview = document.getElementById("fotoPreview");
+
+    // CARGAR DATOS
+    window.addEventListener("load", () => {
+        if (nombreInput)
+            nombreInput.value = localStorage.getItem("nombre") || "";
+
+        if (zonaInput)
+            zonaInput.value = localStorage.getItem("zona") || "";
+
+        let foto = localStorage.getItem("foto");
+        if (foto && fotoPreview) {
+            fotoPreview.src = foto;
+        }
+    });
+
+    // GUARDAR NOMBRE
+    if (nombreInput) {
+        nombreInput.addEventListener("input", e => {
+            localStorage.setItem("nombre", e.target.value);
+        });
+    }
+
+    // GUARDAR ZONA
+    if (zonaInput) {
+        zonaInput.addEventListener("change", e => {
+            localStorage.setItem("zona", e.target.value);
+        });
+    }
+
+    // FOTO
+    if (fotoInput) {
+        fotoInput.addEventListener("change", function () {
+            let file = this.files[0];
+            let reader = new FileReader();
+
+            reader.onload = function (e) {
+                fotoPreview.src = e.target.result;
+                localStorage.setItem("foto", e.target.result);
+            };
+
+            reader.readAsDataURL(file);
+        });
+    }
+
+    // ===== LOGOUT =====
+    window.logout = function () {
+        localStorage.removeItem("sesion");
+        location.reload();
+    };
+
 });
-
-/* SESIÓN */
-let user = localStorage.getItem("sesion");
-
-if(user){
-    document.getElementById("btnSesion").style.display="none";
-    document.getElementById("perfilMenu").style.display="inline-block";
-    document.getElementById("nombreBienvenida").innerText=user;
-}
-
-window.logout=function(){
-    localStorage.removeItem("sesion");
-    location.reload();
-};
 </script>
-
-</body>
-</html>
