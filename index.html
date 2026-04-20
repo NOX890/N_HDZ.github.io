@@ -54,7 +54,6 @@ nav{
     background:rgba(255,255,255,0.2);
 }
 
-/* NAV RIGHT */
 .nav-right{
     display:flex;
     align-items:center;
@@ -160,10 +159,8 @@ nav{
 
 .perfil-botones-texto img {
     width: 170px;
-    height: auto;
-    object-fit: contain;
     cursor: pointer;
-    transition: 0.2s;
+    transition:0.2s;
 }
 
 .perfil-botones-texto img:hover {
@@ -240,16 +237,54 @@ nav{
 .cultivo-imagen {
     width: 100%;
     height: 70vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: #0d6b2f;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:#0d6b2f;
 }
 
 .cultivo-imagen img {
     width: 100%;
     height: 100%;
     object-fit: contain;
+}
+
+/* ===== EDITAR PERFIL ===== */
+.form-box{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:70vh;
+}
+
+.form-card{
+    background:white;
+    color:black;
+    padding:30px;
+    border-radius:15px;
+    width:320px;
+    max-width:90%;
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    text-align:center;
+}
+
+.form-card input{
+    padding:10px;
+    border-radius:8px;
+    border:none;
+    outline:none;
+    background:#f0f0f0;
+}
+
+.form-card button{
+    padding:10px;
+    background:#2e6b12;
+    color:white;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
 }
 </style>
 </head>
@@ -268,7 +303,6 @@ nav{
 </div>
 
 <div class="nav-right">
-
     <a href="login.html" id="btnSesion" class="login-btn">Sesión</a>
 
     <div id="perfilMenu" class="perfil-container" style="display:none;">
@@ -281,7 +315,6 @@ nav{
             <a onclick="logout()">Cerrar sesión</a>
         </div>
     </div>
-
 </div>
 </nav>
 
@@ -297,13 +330,16 @@ nav{
 <div class="perfil-hero">
 
 <div class="perfil-texto">
+
 <h1>Bienvenida</h1>
 <h2>Bienvenida, <span id="nombreBienvenida"></span> 🌱</h2>
 
 <div class="perfil-botones-texto">
-<img src="icono1.jpeg">
+
+<img src="icono1.jpeg" onclick="mostrar('huerto')">
 <img src="icono2.jpeg">
 <img src="icono3.jpeg">
+
 </div>
 
 </div>
@@ -317,8 +353,21 @@ nav{
 
 <!-- EDITAR PERFIL -->
 <div id="editarPerfil" class="section">
-    <h2>Editar perfil</h2>
-    <p>Aquí podrás modificar tu información.</p>
+<div class="form-box">
+
+<div class="form-card">
+
+<h2>Editar Perfil</h2>
+
+<input type="text" id="editUsuario" placeholder="Usuario">
+<input type="password" id="editPassword" placeholder="Contraseña">
+<input type="text" id="editZona" placeholder="Zona climática">
+
+<button onclick="guardarPerfil()">Guardar cambios</button>
+
+</div>
+
+</div>
 </div>
 
 <!-- HUERTO -->
@@ -359,8 +408,6 @@ nav{
 function mostrar(id){
     document.querySelectorAll(".section").forEach(s => s.classList.remove("active"));
     document.getElementById(id).classList.add("active");
-
-    document.getElementById("dropdownMenu")?.classList.remove("show");
 }
 
 function toggleMenu(e){
@@ -383,6 +430,23 @@ function cambiarHuerto(icono){
     if(icono === "icono2"){
         img.src = "recursos.jpeg";
     }
+}
+
+/* GUARDAR PERFIL */
+function guardarPerfil(){
+    let usuario = document.getElementById("editUsuario").value;
+    let pass = document.getElementById("editPassword").value;
+    let zona = document.getElementById("editZona").value;
+
+    if(usuario){
+        localStorage.setItem("sesion", usuario);
+        document.getElementById("nombreBienvenida").innerText = usuario;
+    }
+
+    localStorage.setItem("password", pass);
+    localStorage.setItem("zona", zona);
+
+    alert("Perfil actualizado 🌱");
 }
 
 /* SESIÓN */
