@@ -12,13 +12,16 @@ body {
     color: white;
 }
 
-/* NAV */
+/* ===== NAV ===== */
 nav{
     background:#2e6b12;
     padding:10px 15px;
     display:flex;
     justify-content:space-between;
     align-items:center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
 .nav-left{
@@ -42,6 +45,13 @@ nav{
     text-decoration:none;
     font-weight:bold;
     cursor:pointer;
+    padding:6px 10px;
+    border-radius:8px;
+    transition:0.2s;
+}
+
+.menu-links a:hover{
+    background:rgba(255,255,255,0.2);
 }
 
 /* NAV RIGHT */
@@ -58,19 +68,20 @@ nav{
     cursor:pointer;
     text-decoration:none;
     color:black;
+    font-weight:bold;
 }
 
-/* SECCIONES */
+/* ===== SECCIONES ===== */
 .section {
     display: none;
-    padding: 40px;
+    padding: 30px;
 }
 
 .active {
     display: block;
 }
 
-/* HERO */
+/* ===== HERO ===== */
 .hero {
     display: flex;
     justify-content: center;
@@ -81,7 +92,7 @@ nav{
     border-radius: 20px;
 }
 
-/* PERFIL */
+/* ===== PERFIL ===== */
 .perfil-container {
     position: relative;
 }
@@ -108,15 +119,18 @@ nav{
     display:block;
     padding:10px;
     color:white;
-    cursor:pointer;
     text-decoration:none;
+}
+
+.dropdown a:hover {
+    background:rgba(255,255,255,0.2);
 }
 
 .dropdown.show {
     display:block;
 }
 
-/* PERFIL */
+/* ===== PERFIL ===== */
 .perfil-hero {
     display:flex;
     height:80vh;
@@ -162,7 +176,7 @@ nav{
     object-fit:cover;
 }
 
-/* HUERTO */
+/* ===== HUERTO ===== */
 .huerto-container{
     display:flex;
     height:80vh;
@@ -191,6 +205,11 @@ nav{
 .huerto-botones img{
     width:180px;
     cursor:pointer;
+    transition:0.2s;
+}
+
+.huerto-botones img:hover{
+    transform: scale(1.05);
 }
 
 .huerto-der{
@@ -201,11 +220,14 @@ nav{
 }
 
 .cuadro-huerto{
-    width:958px;
-    height:637px;
+    width:90%;
+    height:90%;
     background:white;
     border-radius:10px;
     overflow:hidden;
+    display:flex;
+    justify-content:center;
+    align-items:center;
 }
 
 .huerto-img{
@@ -214,7 +236,7 @@ nav{
     object-fit:contain;
 }
 
-/* CULTIVOS */
+/* ===== CULTIVOS ===== */
 .cultivo-imagen {
     width: 100%;
     height: 70vh;
@@ -276,7 +298,7 @@ nav{
 
 <div class="perfil-texto">
 <h1>Bienvenida</h1>
-<h2 id="nombreBienvenida"></h2>
+<h2>Bienvenida, <span id="nombreBienvenida"></span> 🌱</h2>
 
 <div class="perfil-botones-texto">
 <img src="icono1.jpeg">
@@ -293,7 +315,7 @@ nav{
 </div>
 </div>
 
-<!-- EDITAR PERFIL (ARREGLADO) -->
+<!-- EDITAR PERFIL -->
 <div id="editarPerfil" class="section">
     <h2>Editar perfil</h2>
     <p>Aquí podrás modificar tu información.</p>
@@ -350,7 +372,7 @@ document.addEventListener("click", () => {
     document.getElementById("dropdownMenu")?.classList.remove("show");
 });
 
-/* CAMBIO DE IMAGEN HUERTO */
+/* HUERTO */
 function cambiarHuerto(icono){
     const img = document.getElementById("huertoMain");
 
@@ -369,6 +391,9 @@ let user = localStorage.getItem("sesion");
 if(user){
     document.getElementById("btnSesion").style.display="none";
     document.getElementById("perfilMenu").style.display="inline-block";
+    document.getElementById("nombreBienvenida").innerText = user;
+}else{
+    document.getElementById("nombreBienvenida").innerText = "Invitado";
 }
 
 function logout(){
