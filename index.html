@@ -144,7 +144,6 @@ nav{
     align-items:center;
 }
 
-/* 🔥 ARREGLO ICONOS */
 .perfil-botones-texto img {
     width: 170px;
     height: auto;
@@ -229,6 +228,7 @@ nav{
     width: 100%;
     height: 100%;
     object-fit: contain;
+    cursor: pointer;
 }
 </style>
 </head>
@@ -247,12 +247,10 @@ nav{
 </div>
 
 <div class="nav-right">
-
     <a href="login.html" id="btnSesion" class="login-btn">Sesión</a>
 
     <div id="perfilMenu" class="perfil-container" style="display:none;">
         <img src="perfil.png" class="icono" onclick="toggleMenu(event)">
-
         <div id="dropdownMenu" class="dropdown">
             <a onclick="mostrar('editarPerfil')">Editar perfil</a>
             <a onclick="mostrar('perfil')">Mi perfil</a>
@@ -260,7 +258,6 @@ nav{
             <a onclick="logout()">Cerrar sesión</a>
         </div>
     </div>
-
 </div>
 </nav>
 
@@ -271,57 +268,17 @@ nav{
     </div>
 </div>
 
-<!-- PERFIL -->
-<div id="perfil" class="section">
-<div class="perfil-hero">
-
-<div class="perfil-texto">
-<h1>Bienvenida</h1>
-<h2 id="nombreBienvenida"></h2>
-
-<div class="perfil-botones-texto">
-<img src="icono1.jpeg">
-<img src="icono2.jpeg">
-<img src="icono3.jpeg">
-</div>
-
-</div>
-
-<div class="perfil-imagen">
-<img src="perfil-fondo.jpeg">
-</div>
-
-</div>
-</div>
-
-<!-- HUERTO -->
-<div id="huerto" class="section">
-<div class="huerto-container">
-
-<div class="huerto-izq">
-<img src="logo.png" class="huerto-logo">
-
-<div class="huerto-botones">
-<img src="icono4.jpeg">
-<img src="icono2.jpeg">
-<img src="icono3.jpeg">
-</div>
-
-</div>
-
-<div class="huerto-der">
-<div class="cuadro-huerto">
-<img src="huerto.jpeg" class="huerto-img">
-</div>
-</div>
-
-</div>
-</div>
-
 <!-- CULTIVOS -->
 <div id="cultivos" class="section">
 <div class="cultivo-imagen">
-<img src="cultivos.jpeg">
+    <img src="cultivos.jpeg" id="imgCultivos">
+</div>
+</div>
+
+<!-- 🔴 NUEVA SECCIÓN TOMATE -->
+<div id="tomate" class="section">
+<div class="cultivo-imagen">
+    <img src="tomate-grande.jpg">
 </div>
 </div>
 
@@ -332,31 +289,23 @@ nav{
 window.mostrar = function(id){
     document.querySelectorAll(".section").forEach(s=>s.classList.remove("active"));
     document.getElementById(id).classList.add("active");
-    document.getElementById("dropdownMenu").classList.remove("show");
 };
 
-window.toggleMenu = function(e){
-    e.stopPropagation();
-    document.getElementById("dropdownMenu").classList.toggle("show");
-};
+/* 🔥 DETECCIÓN DE CLICK EN EL TOMATE */
+document.getElementById("imgCultivos").addEventListener("click", function(e){
 
-document.addEventListener("click",()=>{
-    document.getElementById("dropdownMenu").classList.remove("show");
+    const rect = this.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    console.log("X:", x, "Y:", y); // usa esto para ajustar
+
+    // 🔴 AJUSTA ESTOS VALORES
+    if(x > 100 && x < 250 && y > 100 && y < 250){
+        mostrar("tomate");
+    }
+
 });
-
-/* SESIÓN */
-let user = localStorage.getItem("sesion");
-
-if(user){
-    document.getElementById("btnSesion").style.display="none";
-    document.getElementById("perfilMenu").style.display="inline-block";
-    document.getElementById("nombreBienvenida").innerText=user;
-}
-
-window.logout=function(){
-    localStorage.removeItem("sesion");
-    location.reload();
-};
 </script>
 
 </body>
