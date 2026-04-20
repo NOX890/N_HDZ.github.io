@@ -206,24 +206,25 @@ nav{
     display:flex;
     flex-direction:column;
     align-items:center;
-    justify-content:space-between; /* 🔥 clave */
-    padding:20px;
+    justify-content:space-between; /* 🔥 clave para distribuir */
+    padding:25px 15px;
 }
 
 /* LOGO */
 .huerto-logo{
-    height:130px;
-    margin-bottom:10px;
+    height:170px;
+    margin-top:10px;
 }
 
 /* BOTONES */
-.huerto-botones{
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    gap:10px; /* 🔥 más juntos */
-    width:100%;
-    align-items:center;
+.huerto-botones img{
+    width:150px;
+    cursor:pointer;
+    transition:0.2s;
+}
+
+.huerto-botones img:hover{
+    transform: scale(1.05);
 }
 
 .huerto-botones img{
