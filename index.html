@@ -334,27 +334,35 @@ nav{
 <div id="proveedores" class="section"><h2>Proveedores</h2></div>
 
 <script>
-window.mostrar = function(id){
-    const seccion = document.getElementById(id);
-    if(!seccion) return;
+<script>
+function mostrar(id){
+    document.querySelectorAll(".section").forEach(s => s.classList.remove("active"));
+    document.getElementById(id).classList.add("active");
 
-    document.querySelectorAll(".section").forEach(s=>s.classList.remove("active"));
-    seccion.classList.add("active");
+    document.getElementById("dropdownMenu")?.classList.remove("show");
+}
 
-    const menu = document.getElementById("dropdownMenu");
-    if(menu) menu.classList.remove("show");
-};
-
-window.toggleMenu = function(e){
+function toggleMenu(e){
     e.stopPropagation();
-    const menu = document.getElementById("dropdownMenu");
-    if(menu) menu.classList.toggle("show");
-};
+    document.getElementById("dropdownMenu").classList.toggle("show");
+}
 
-document.addEventListener("click",()=>{
-    const menu = document.getElementById("dropdownMenu");
-    if(menu) menu.classList.remove("show");
+document.addEventListener("click", () => {
+    document.getElementById("dropdownMenu")?.classList.remove("show");
 });
+
+/* CAMBIO DE IMAGEN HUERTO */
+function cambiarHuerto(icono){
+    const img = document.getElementById("huertoMain");
+
+    if(icono === "icono4"){
+        img.src = "actividades.jpeg";
+    }
+
+    if(icono === "icono2"){
+        img.src = "recursos.jpeg";
+    }
+}
 
 /* SESIÓN */
 let user = localStorage.getItem("sesion");
@@ -362,13 +370,13 @@ let user = localStorage.getItem("sesion");
 if(user){
     document.getElementById("btnSesion").style.display="none";
     document.getElementById("perfilMenu").style.display="inline-block";
-    document.getElementById("nombreBienvenida").innerText=user;
 }
 
-window.logout=function(){
+function logout(){
     localStorage.removeItem("sesion");
     location.reload();
-};
+}
+</script>
 </script>
 
 </body>
