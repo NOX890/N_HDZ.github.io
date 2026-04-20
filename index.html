@@ -408,6 +408,13 @@ nav{
 function mostrar(id){
     document.querySelectorAll(".section").forEach(s => s.classList.remove("active"));
     document.getElementById(id).classList.add("active");
+
+    document.getElementById("dropdownMenu")?.classList.remove("show");
+
+    // 🌿 RESET HUERTO SIEMPRE QUE SE ABRE
+    if(id === "huerto"){
+        document.getElementById("huertoMain").src = "huerto.jpeg";
+    }
 }
 
 function toggleMenu(e){
