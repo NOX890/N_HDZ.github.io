@@ -144,7 +144,6 @@ nav{
     align-items:center;
 }
 
-/* 🔥 ARREGLO ICONOS */
 .perfil-botones-texto img {
     width: 170px;
     height: auto;
@@ -294,6 +293,12 @@ nav{
 </div>
 </div>
 
+<!-- EDITAR PERFIL (ARREGLADO) -->
+<div id="editarPerfil" class="section">
+    <h2>Editar perfil</h2>
+    <p>Aquí podrás modificar tu información.</p>
+</div>
+
 <!-- HUERTO -->
 <div id="huerto" class="section">
 <div class="huerto-container">
@@ -330,18 +335,25 @@ nav{
 
 <script>
 window.mostrar = function(id){
+    const seccion = document.getElementById(id);
+    if(!seccion) return;
+
     document.querySelectorAll(".section").forEach(s=>s.classList.remove("active"));
-    document.getElementById(id).classList.add("active");
-    document.getElementById("dropdownMenu").classList.remove("show");
+    seccion.classList.add("active");
+
+    const menu = document.getElementById("dropdownMenu");
+    if(menu) menu.classList.remove("show");
 };
 
 window.toggleMenu = function(e){
     e.stopPropagation();
-    document.getElementById("dropdownMenu").classList.toggle("show");
+    const menu = document.getElementById("dropdownMenu");
+    if(menu) menu.classList.toggle("show");
 };
 
 document.addEventListener("click",()=>{
-    document.getElementById("dropdownMenu").classList.remove("show");
+    const menu = document.getElementById("dropdownMenu");
+    if(menu) menu.classList.remove("show");
 });
 
 /* SESIÓN */
