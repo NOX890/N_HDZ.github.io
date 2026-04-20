@@ -129,25 +129,35 @@ nav{
     display:block;
 }
 
-/* ===== PERFIL ===== */
 .perfil-hero{
+    display:flex;
     width:90%;
+    height:80vh;
     margin:auto;
     border-radius:20px;
     overflow:hidden;
     box-shadow:0 10px 30px rgba(0,0,0,0.3);
+    align-items:stretch;
 }
 
+/* IZQUIERDA */
 .perfil-texto {
     width:30%;
-    height:100%;
+    background: rgba(13,107,47,0.85);
+    padding:40px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
 }
 
+/* TÍTULO */
 .perfil-texto h1 {
     color:yellow;
     font-size:50px;
+    margin:0;
 }
 
+/* BOTONES */
 .perfil-botones-texto {
     margin-top:20px;
     display:flex;
@@ -166,10 +176,16 @@ nav{
     transform: scale(1.05);
 }
 
+/* DERECHA */
 .perfil-imagen {
-    width:60%;
+    width:70%;
     height:100%;
-    display:flex;
+}
+
+.perfil-imagen img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
 }
 
 /* ===== HUERTO ===== */
