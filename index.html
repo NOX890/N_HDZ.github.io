@@ -1,14 +1,301 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Siembra Seguro</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial;
+    background: #408A19;
+    color: white;
+}
+
+/* NAV */
+nav {
+    background: #2e6b12;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+nav a {
+    color: white;
+    margin: 10px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+/* SECCIONES */
+.section {
+    display: none;
+    padding: 40px;
+}
+
+.active {
+    display: block;
+}
+
+/* PORTADA */
+.hero {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+.hero img {
+    max-width: 90%;
+    border-radius: 20px;
+}
+
+/* BOTONES */
+.contenedor-botones {
+    display: flex;
+    justify-content: space-around;
+    padding: 30px;
+}
+
+.card {
+    width: 28%;
+    position: relative;
+    cursor: pointer;
+}
+
+.card img {
+    width: 100%;
+    border-radius: 20px;
+}
+
+/* SESIÓN */
+.login-btn {
+    background: #8DE35F;
+    padding: 10px 20px;
+    border-radius: 20px;
+}
+
+/* PERFIL MENU */
+.perfil-container {
+    position: relative;
+}
+
+.icono {
+    width: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.dropdown {
+    display: none;
+    position: absolute;
+    right: 0;
+    background: #2e6b12;
+}
+
+.dropdown a {
+    display: block;
+    padding: 10px;
+    color: white;
+}
+
+/* PERFIL HERO */
+.perfil-hero {
+    display: flex;
+    height: 80vh;
+}
+
+.perfil-texto {
+    width: 30%;
+    background: #0d6b2f;
+    padding: 40px;
+}
+
+.perfil-texto h1 {
+    color: yellow;
+    font-size: 50px;
+}
+
+.perfil-imagen {
+    width: 70%;
+    position: relative;
+}
+
+.perfil-imagen img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.perfil-botones {
+    position: absolute;
+    bottom: 30px;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.perfil-botones img {
+    width: 120px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.perfil-botones img:hover {
+    transform: scale(1.1);
+}
+
+/* ===== EDITAR PERFIL ===== */
+.perfil-edit{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    height:80vh;
+    gap:15px;
+    text-align:center;
+}
+
+.perfil-edit input,
+.perfil-edit select{
+    width:250px;
+    padding:10px;
+    border-radius:10px;
+    border:none;
+}
+
+.foto-container{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:10px;
+}
+
+.foto-container img{
+    width:120px;
+    height:120px;
+    border-radius:50%;
+    object-fit:cover;
+    border:3px solid white;
+}
+
+.estado{
+    font-size:12px;
+    opacity:0.8;
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+    <div>
+        <a onclick="mostrar('inicio')">Inicio</a>
+        <a onclick="mostrar('cultivos')">Cultivos</a>
+        <a onclick="mostrar('recursos')">Recursos</a>
+        <a onclick="mostrar('proveedores')">Proveedores</a>
+    </div>
+
+    <div>
+        <a href="login.html" id="btnSesion" class="login-btn">Sesión</a>
+
+        <div id="perfilMenu" style="display:none;" class="perfil-container">
+            <img src="perfil.png" class="icono" onclick="toggleMenu(event)">
+
+            <div id="dropdownMenu" class="dropdown">
+                <a onclick="mostrar('editarPerfil')">Editar perfil</a>
+                <a onclick="mostrar('perfil')">Mi perfil</a>
+                <a onclick="mostrar('huerto')">Mi huerto</a>
+                <a onclick="logout()">Cerrar sesión</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- INICIO -->
+<div id="inicio" class="section active">
+    <div class="hero">
+        <img src="portada principal.jpeg">
+    </div>
+
+    <div class="contenedor-botones">
+        <div class="card" onclick="mostrar('cultivos')">
+            <img src="plantar.jpeg">
+        </div>
+        <div class="card" onclick="mostrar('recursos')">
+            <img src="sustentable.jpeg">
+        </div>
+        <div class="card" onclick="mostrar('proveedores')">
+            <img src="proveedores.jpeg">
+        </div>
+    </div>
+</div>
+
+<!-- PERFIL -->
+<div id="perfil" class="section">
+    <div class="perfil-hero">
+
+        <div class="perfil-texto">
+            <h1>Bienvenida</h1>
+            <h2 id="nombreBienvenida"></h2>
+        </div>
+
+        <div class="perfil-imagen">
+            <img src="perfil-fondo.jpeg">
+
+            <div class="perfil-botones">
+                <img src="icono1.jpeg" onclick="mostrar('huerto')">
+                <img src="icono2.jpeg" onclick="mostrar('cultivos')">
+                <img src="icono3.jpeg" onclick="mostrar('proveedores')">
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- HUERTO -->
+<div id="huerto" class="section"><h2>Mi Huerto</h2></div>
+<div id="cultivos" class="section"><h2>Cultivos</h2></div>
+<div id="recursos" class="section"><h2>Recursos</h2></div>
+<div id="proveedores" class="section"><h2>Proveedores</h2></div>
+
+<!-- ===== EDITAR PERFIL ===== -->
+<div id="editarPerfil" class="section">
+
+    <div class="perfil-edit">
+
+        <h2>Editar perfil</h2>
+
+        <div class="foto-container">
+            <img id="fotoPreview" src="perfil.png">
+            <input type="file" id="fotoInput" accept="image/*">
+        </div>
+
+        <input type="text" id="nombreInput" placeholder="Nombre">
+
+        <select id="zonaInput">
+            <option value="">Zona climática 🌎</option>
+            <option>Desértica 🌵</option>
+            <option>Tropical 🌴</option>
+            <option>Templada 🌿</option>
+            <option>Fría ❄️</option>
+        </select>
+
+        <p class="estado">💾 Guardado automático</p>
+
+    </div>
+</div>
+
 <script>
 document.addEventListener("DOMContentLoaded", () => {
 
-    // ===== SECCIONES =====
+    // SECCIONES
     window.mostrar = function (id) {
         document.querySelectorAll(".section").forEach(sec => sec.classList.remove("active"));
         document.getElementById(id).classList.add("active");
         document.getElementById("dropdownMenu").style.display = "none";
     };
 
-    // ===== MENÚ =====
+    // MENÚ
     window.toggleMenu = function (event) {
         event.stopPropagation();
         let m = document.getElementById("dropdownMenu");
@@ -19,7 +306,7 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("dropdownMenu").style.display = "none";
     });
 
-    // ===== SESIÓN =====
+    // SESIÓN
     let user = localStorage.getItem("sesion");
 
     if (user) {
@@ -28,10 +315,7 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("nombreBienvenida").innerText = user;
     }
 
-    // ======================================================
-    // 🔥 TU BLOQUE INTEGRADO (CARGA + GUARDADO PERFIL)
-    // ======================================================
-
+    // ===== PERFIL (TU BLOQUE INTEGRADO BIEN) =====
     const nombreInput = document.getElementById("nombreInput");
     const zonaInput = document.getElementById("zonaInput");
     const fotoInput = document.getElementById("fotoInput");
@@ -39,48 +323,36 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // CARGAR DATOS
     window.addEventListener("load", () => {
-        if (nombreInput)
-            nombreInput.value = localStorage.getItem("nombre") || "";
-
-        if (zonaInput)
-            zonaInput.value = localStorage.getItem("zona") || "";
+        if (nombreInput) nombreInput.value = localStorage.getItem("nombre") || "";
+        if (zonaInput) zonaInput.value = localStorage.getItem("zona") || "";
 
         let foto = localStorage.getItem("foto");
-        if (foto && fotoPreview) {
-            fotoPreview.src = foto;
-        }
+        if (foto) fotoPreview.src = foto;
     });
 
     // GUARDAR NOMBRE
-    if (nombreInput) {
-        nombreInput.addEventListener("input", e => {
-            localStorage.setItem("nombre", e.target.value);
-        });
-    }
+    nombreInput?.addEventListener("input", e => {
+        localStorage.setItem("nombre", e.target.value);
+    });
 
     // GUARDAR ZONA
-    if (zonaInput) {
-        zonaInput.addEventListener("change", e => {
-            localStorage.setItem("zona", e.target.value);
-        });
-    }
+    zonaInput?.addEventListener("change", e => {
+        localStorage.setItem("zona", e.target.value);
+    });
 
     // FOTO
-    if (fotoInput) {
-        fotoInput.addEventListener("change", function () {
-            let file = this.files[0];
-            let reader = new FileReader();
+    fotoInput?.addEventListener("change", function () {
+        let reader = new FileReader();
 
-            reader.onload = function (e) {
-                fotoPreview.src = e.target.result;
-                localStorage.setItem("foto", e.target.result);
-            };
+        reader.onload = function (e) {
+            fotoPreview.src = e.target.result;
+            localStorage.setItem("foto", e.target.result);
+        };
 
-            reader.readAsDataURL(file);
-        });
-    }
+        reader.readAsDataURL(this.files[0]);
+    });
 
-    // ===== LOGOUT =====
+    // LOGOUT
     window.logout = function () {
         localStorage.removeItem("sesion");
         location.reload();
@@ -88,3 +360,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 </script>
+
+</body>
+</html>
