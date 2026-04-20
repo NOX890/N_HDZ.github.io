@@ -12,7 +12,7 @@ body {
     color: white;
 }
 
-/* ================= NAV MODERNA ================= */
+/* NAV */
 nav{
     background:#2e6b12;
     padding:10px 15px;
@@ -60,7 +60,7 @@ nav{
     color:black;
 }
 
-/* ================= SECCIONES ================= */
+/* SECCIONES */
 .section {
     display: none;
     padding: 40px;
@@ -70,7 +70,7 @@ nav{
     display: block;
 }
 
-/* ================= HERO ================= */
+/* HERO */
 .hero {
     display: flex;
     justify-content: center;
@@ -81,7 +81,7 @@ nav{
     border-radius: 20px;
 }
 
-/* ================= PERFIL NAV ================= */
+/* PERFIL */
 .perfil-container {
     position: relative;
 }
@@ -116,7 +116,7 @@ nav{
     display:block;
 }
 
-/* ================= PERFIL ================= */
+/* PERFIL */
 .perfil-hero {
     display:flex;
     height:80vh;
@@ -144,14 +144,17 @@ nav{
     align-items:center;
 }
 
+/* 🔥 ARREGLO ICONOS */
 .perfil-botones-texto img {
-    width:170px;
-    cursor:pointer;
-    transition:0.2s;
+    width: 170px;
+    height: auto;
+    object-fit: contain;
+    cursor: pointer;
+    transition: 0.2s;
 }
 
 .perfil-botones-texto img:hover {
-    transform:scale(1.05);
+    transform: scale(1.05);
 }
 
 .perfil-imagen img{
@@ -160,7 +163,7 @@ nav{
     object-fit:cover;
 }
 
-/* ================= HUERTO ================= */
+/* HUERTO */
 .huerto-container{
     display:flex;
     height:80vh;
@@ -177,7 +180,7 @@ nav{
 }
 
 .huerto-logo{
-    height:70px;
+    height:100px;
 }
 
 .huerto-botones{
@@ -212,7 +215,7 @@ nav{
     object-fit:contain;
 }
 
-/* ================= CULTIVOS ================= */
+/* CULTIVOS */
 .cultivo-imagen {
     width: 100%;
     height: 70vh;
@@ -227,53 +230,12 @@ nav{
     height: 100%;
     object-fit: contain;
 }
-
-/* ================= EDITAR PERFIL ================= */
-.perfil-edit{
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    height:80vh;
-    gap:15px;
-    text-align:center;
-}
-
-.perfil-edit input,
-.perfil-edit select{
-    width:250px;
-    padding:10px;
-    border-radius:10px;
-    border:none;
-}
-
-.foto-container{
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    gap:10px;
-}
-
-.foto-container img{
-    width:120px;
-    height:120px;
-    border-radius:50%;
-    object-fit:cover;
-    border:3px solid white;
-}
-
-.estado{
-    font-size:12px;
-    opacity:0.8;
-}
 </style>
 </head>
 
 <body>
 
-<!-- ================= NAV ================= -->
 <nav>
-
 <div class="nav-left">
     <img src="logo.png" class="logo" onclick="mostrar('inicio')">
 
@@ -300,19 +262,17 @@ nav{
     </div>
 
 </div>
-
 </nav>
 
-<!-- ================= INICIO ================= -->
+<!-- INICIO -->
 <div id="inicio" class="section active">
     <div class="hero">
         <img src="portada principal.jpeg">
     </div>
 </div>
 
-<!-- ================= PERFIL ================= -->
+<!-- PERFIL -->
 <div id="perfil" class="section">
-
 <div class="perfil-hero">
 
 <div class="perfil-texto">
@@ -334,9 +294,8 @@ nav{
 </div>
 </div>
 
-<!-- ================= HUERTO ================= -->
+<!-- HUERTO -->
 <div id="huerto" class="section">
-
 <div class="huerto-container">
 
 <div class="huerto-izq">
@@ -357,10 +316,9 @@ nav{
 </div>
 
 </div>
-
 </div>
 
-<!-- ================= CULTIVOS ================= -->
+<!-- CULTIVOS -->
 <div id="cultivos" class="section">
 <div class="cultivo-imagen">
 <img src="cultivos.jpeg">
@@ -369,34 +327,6 @@ nav{
 
 <div id="recursos" class="section"><h2>Recursos</h2></div>
 <div id="proveedores" class="section"><h2>Proveedores</h2></div>
-
-<!-- ================= EDITAR PERFIL ================= -->
-<div id="editarPerfil" class="section">
-
-<div class="perfil-edit">
-
-<h2>Editar perfil</h2>
-
-<div class="foto-container">
-<img id="fotoPreview" src="perfil.png">
-<input type="file" id="fotoInput">
-</div>
-
-<input type="text" id="nombreInput" placeholder="Nombre">
-
-<select id="zonaInput">
-<option value="">Zona climática 🌎</option>
-<option>Desértica 🌵</option>
-<option>Tropical 🌴</option>
-<option>Templada 🌿</option>
-<option>Fría ❄️</option>
-</select>
-
-<p class="estado">💾 Guardado automático</p>
-
-</div>
-
-</div>
 
 <script>
 window.mostrar = function(id){
@@ -423,47 +353,10 @@ if(user){
     document.getElementById("nombreBienvenida").innerText=user;
 }
 
-/* LOGOUT */
 window.logout=function(){
     localStorage.removeItem("sesion");
     location.reload();
 };
-
-/* ================= PERFIL SYSTEM ================= */
-window.addEventListener("load",()=>{
-
-const nombreInput=document.getElementById("nombreInput");
-const zonaInput=document.getElementById("zonaInput");
-const fotoInput=document.getElementById("fotoInput");
-const fotoPreview=document.getElementById("fotoPreview");
-
-if(nombreInput){
-    nombreInput.value=localStorage.getItem("nombre")||"";
-    nombreInput.oninput=(e)=>localStorage.setItem("nombre",e.target.value);
-}
-
-if(zonaInput){
-    zonaInput.value=localStorage.getItem("zona")||"";
-    zonaInput.onchange=(e)=>localStorage.setItem("zona",e.target.value);
-}
-
-if(fotoPreview){
-    let foto=localStorage.getItem("foto");
-    if(foto) fotoPreview.src=foto;
-}
-
-if(fotoInput){
-    fotoInput.onchange=function(){
-        let r=new FileReader();
-        r.onload=e=>{
-            fotoPreview.src=e.target.result;
-            localStorage.setItem("foto",e.target.result);
-        };
-        r.readAsDataURL(this.files[0]);
-    };
-}
-
-});
 </script>
 
 </body>
